@@ -52,6 +52,7 @@
 \usepackage{url}
 \usepackage{wasysym}
 \usepackage{bbm}
+\usepackage{caption}
 
 \usepackage{array}
 \usepackage{csquotes}
@@ -63,9 +64,10 @@
 \newcommand{\Var}{\text{Var}}
 
 \makeatletter
-\renewcommand \thesection{S\@arabic\c@section}
-\renewcommand\thetable{S\@arabic\c@table}
-\renewcommand \thefigure{S\@arabic\c@figure}
+\renewcommand \thesection{\@arabic\c@section}
+\captionsetup[figure]{name=Supplemental Figure}
+\captionsetup[table]{name=Supplemental Table}
+
 \makeatother
 
 %%% To delay floats
@@ -220,8 +222,8 @@
  \thispagestyle{empty}
  \begin{center} 
  \singlespacing	
-\textbf{\scshape \Large Supplemental Material for Sins of Omission} \\ \vspace{0.75em}
- {\large Model-based Estimates of the Health Effects of Excluding Pregnant \\ Participants from Randomized Controlled Trials\footnote{Bilinski \& Emanuel contributed equally. 
+\textbf{\scshape \Large Supplemental Material} \\ \vspace{0.75em}
+ {\large Sins of Omission: Model-Based Estimates of the Health Effects of Excluding Pregnant Participants \\ From Randomized Controlled Trials\footnote{Bilinski \& Emanuel contributed equally. 
  Bilinski: Brown School of Public Health, \url{alyssa\_bilinski@brown.edu}. Emanuel: New York Federal Reserve Bank, \url{natalia@nataliaemanuel.com}.}} 
  \vspace{0.5em} \\
  Alyssa Bilinski $\cdot$ Natalia Emanuel $\cdot$ Andrea Ciaranello
@@ -229,7 +231,7 @@
  \vspace{1em}
  
   \vspace{0.5em}
- \today
+
 \end{center}
 
 \singlespacing
@@ -261,13 +263,13 @@ library(kableExtra)
 
 \subsection{\label{app:stat_tests}Statistical tests}
 
-We considered two statistical approaches to detecting effects.  In the main text, we assume null hypothesis of no effect (``standard power'').  The choice of the best method for constructing a confidence interval for a test of proportions has been the subject of considerable debate \citep{agresti_approximate_1998, newcombe_interval_1998, wilson_probable_1927}.  We compared the type I error associated with five methods over our base rates of interest: Wald (simple asymptotic estimate), Wald with a continuity correction, score, score with a continuity correction, and exact (Fisher) \citep{newcombe_interval_1998}.  We drew independent binomial proportions with equal baseline and treated risk over our range of base rates of interest and tested for a statistically significant difference, evaluating type I error over 50,000.  We found that all methods performed well; based on prior work (e.g., \citep{zash_neural-tube_2018}) and to guard against known concerns about Wald intervals \citep{newcombe_interval_1998}, we chose the score interval as our main specification.  For reference in this supplement, we provide identified sample size estimates required for 95\% power to detect different adverse effects (AEs) using a binary search.  We repeated this process to estimate sample size requirements for a Fisher exact test (Figure \ref{fig:samp_size_sens}, Panel A), which is more robust but has been criticized as overly conservative \citep{agresti_approximate_1998}.  
+We considered two statistical approaches to detecting effects.  In the main text, we assume null hypothesis of no effect (``standard power'').  The choice of the best method for constructing a confidence interval for a test of proportions has been the subject of considerable debate \citep{agresti_approximate_1998, newcombe_interval_1998, wilson_probable_1927}.  We compared the type I error associated with five methods over our base rates of interest: Wald (simple asymptotic estimate), Wald with a continuity correction, score, score with a continuity correction, and exact (Fisher) \citep{newcombe_interval_1998}.  We drew independent binomial proportions with equal baseline and treated risk over our range of base rates of interest and tested for a statistically significant difference, evaluating type I error over 50,000.  We found that all methods performed well; based on prior work (e.g., \citep{zash_neural-tube_2018}) and to guard against known concerns about Wald intervals \citep{newcombe_interval_1998}, we chose the score interval as our main specification.  
 
-Second, we note that non-inferiority approach may be used to estimate sample size required to rule out AEs of a given magnitude (``non-inferiority power'').  While, in practice, many studies use the first approach to identify and report AEs, we included the second because it directly addresses evidence against AEs (in contrast to a lack of evidence of AEs, which may also be a result of low power).  A non-inferiority test sets a null hypothesis that $p_1 - p_0 > \delta$, that an AE exceeds some margin $\delta$, and evaluates the strength of the evidence that $p_1 - p_0 < \delta$ at a chosen level of statistical significance.  We estimated sample size required to rule out AEs with 80\% power at the $\alpha= 0.05$ level, in the case that that $p_1 = p_0$, i.e., that there is, in fact, no AE.  We varied $\delta$ from $\frac{1}{5000}$ to $\frac{1}{2}$.  Results are reported in Figure \ref{fig:samp_size_sens0}, Panel B.  We used score confidence intervals to evaluate statistical significance, which controlled type I error in a simulation study similar to that described above for standard power (observed type I error range: 4.9-5.1\%).
+Second, we note that non-inferiority approach may be used to estimate power required to rule out AEs of a given magnitude (``non-inferiority power'').  While, in practice, many studies use the first approach to identify and report AEs, non-inferiority tests have the advantage of directly addressing evidence against AEs (in contrast to a lack of evidence of AEs, which may also be a result of low power).  A non-inferiority test sets a null hypothesis that $p_1 - p_0 > \delta$, that an AE exceeds some margin $\delta$, and evaluates the strength of the evidence that $p_1 - p_0 < \delta$ at a chosen level of statistical significance. However, due to common practice in the literature, we leave further discussion of this approach to future work.
 
 \begin{figure}[H]
     \centering
-    \caption{Type I Error by Inference Method}
+    \caption{Type I error by inference method}
     \label{fig:t1e}
     \includegraphics[width = 6.5in]{2_Output/t1_error.png}
     \begin{figurenotes}
@@ -275,25 +277,9 @@ Second, we note that non-inferiority approach may be used to estimate sample siz
     \end{figurenotes}
 \end{figure}
 
-
-\begin{figure}[H]
-    \centering
-    \caption{Sample Sizes Required to Detect Adverse Effects}
-    Panel A: Score test\\
-    \includegraphics[width = 5in]{2_Output/samp_size_95.png} \\
-    Panel B: Fisher exact test\\
-    \includegraphics[width = 5in]{2_Output/samp_size_95_fisher.png} \\
-    Panel C: Non-inferiority test\\
-    \includegraphics[width = 5in]{2_Output/samp_size_95_NI.png}\\
-    \label{fig:samp_size_sens0}
-    \begin{figurenotes}
-    Panels A and B displays  sample sizes required per arm to detect AEs from a drug with 95\% power using a score test and Fisher exact test respectively, with expected number of incremental cases of a AEs in a completed trial over what would be expected in the general population in parentheses. Panel C displays sample sizes required per arm to rule out AEs at the $\alpha =0.5$ level from a drug with 80\% power, with expected number of incremental cases of an AE in a completed trial over what would be expected in the general population in parentheses.  %See Figures S1-S3 for alternative specifications and levels of power.
-    \end{figurenotes}
-\end{figure}
-
 <<>>=
 # read in data
-df = read_excel("./0_Data/1_Parameter_Estimates/table_s1.xlsx") %>%
+df = read_excel("./0_Data/1_Parameter_Estimates/table_s1_r1.xlsx") %>%
   mutate(Value = ifelse(nchar(Value)>10, as.character(as.numeric(Value)), Value))
 @
 
@@ -305,17 +291,17 @@ df = df[!is.na(df$Code),]
 
 \label{app:trial_costs}
 
-There is considerable variation in the cost of RCTs for drug approval, and there are limited data on the cost of trials specifically including pregnant participants (e.g., \citep{sertkaya2016key, martin2017much, moore_estimated_2018}).  We use \$100m as a conservative estimate of trial costs, assuming increased costs associated with pregnancy-related monitoring and liability \citep{nas_2024}.  In published studies, upper ranges of combined Phase I-III trial costs were approximately \$79m \citep{sertkaya2016key} in one study and \$110m in another \citep{martin2017much}. Another found that 75\% of pivotal trials cost less thant \$33m, with a long upper tail \citep{moore_estimated_2018} including approximately 5-6\% exceeding \$100m.
+There is considerable variation in the cost of RCTs for drug approval, and there are limited data on the cost of trials specifically including pregnant participants (e.g., \citep{sertkaya2016key, martin2017much, moore_estimated_2018}).  We use \$100m as a conservative estimate of trial costs, assuming increased costs associated with pregnancy-related monitoring and liability \citep{nas_2024}.  In published studies, upper ranges of combined Phase I-III trial costs were approximately \$79m \citep{sertkaya2016key} in one study and \$110m in another \citep{martin2017much}. Another found that 75\% of pivotal trials cost less than \$33m, with a long upper tail \citep{moore_estimated_2018} including approximately 5-6\% exceeding \$100m.
 %For Sertkaya, sum abstract figures: 6.6 + 52.9+19.6
 %For Martin, sum approximate 75th percentiles in Figure 2 (eyeballed)
 %For Moore, eyeballed "Figure": assume 7 or 8/138
 
-\subsection{\textit{Ex post} value of information}
-\subsubsection{COVID-19 Vaccines}
+\section{\textit{Ex post} value of information}
+\subsection{COVID-19 Vaccines}
 \label{app:methods_covid}
 
 \paragraph{Vaccine uptake counterfactuals.} 
-We obtained data on COVID-19 vaccine uptake in the general population by state, sex, and age group as well as among pregnant people from a subset of states in the Vaccine Safety Datalink from the Centers for Disease Control and Prevention \citep{noauthor_covid-19_nodate, noauthor_weekly_nodate}.  We constructed two potential counterfactuals for COVID-19 vaccine. Figure \ref{app:fig_comp_cf} highlights that these counterfactuals are conservative relative to uptake of the 2019 flu vaccine and the COVID-19 booster, which was strongly recommended during pregnancy.
+We obtained data on COVID-19 vaccine uptake in the general population by state, sex, and age group as well as among pregnant people from a subset of states in the Vaccine Safety Datalink from the Centers for Disease Control and Prevention \citep{noauthor_covid-19_nodate, noauthor_weekly_nodate}.  We constructed two potential counterfactuals for COVID-19 vaccine: paralleling either: 1) women from the same age and state (``age- and state-matched'') or 2) women aged 40-49 the same state (``state-matched COVID-19 booster reference''). Figure \ref{app:fig_comp_cf} highlights that even the latter counterfactual is conservative relative to uptake of the 2019 flu vaccine and COVID-19 booster uptake in VSD states, which was strongly recommended during pregnancy.
 
 \begin{figure}[h]
     \centering
@@ -326,46 +312,38 @@ We obtained data on COVID-19 vaccine uptake in the general population by state, 
     \includegraphics[width = 4.5in]{2_Output/covid_fig_booster.png}\\
     \label{fig:samp_size_sens}
    \end{figure}
-   
-\begin{enumerate}
-    \item \textit{Females age- and state-matched:} First, we considered a counterfactual assuming that with RCT data (and subsequent recommendations), pregnant people would have obtained the COVID-19 vaccine a comparable rate to females from the same age and state.  
 
-     We first constructed a weighted average of state COVID-19 vaccination trajectories among women aged 18-25, 25-39, and 40-49 years in Vaccine Safety Datalink (VSD) states for which pregnant uptake were available \citep{lipkind_receipt_2022}.  Let $p_{asm}$ be cumulative vaccination rate in age-group $a$ in state $s$ achieved prior to the start of month $m$, and $w_{as}$ be the fraction of the surveillance population in age-group $a$ and state $s$.  We imputed counterfactual uptake as:
-        \begin{align*}
-        p_m^{A} = \sum_{s} \sum_{a} w_{as} p_{asm}
-        \end{align*}
-    
-    As a sensitivity check, we obtained data on fertility rate by maternal age from 2016 to 2021 and state from National Vital Statistics \citep{vital_stats_2023} and combined this with female age-specific population estimates \citep{bureau_state_nodate} to construct weights; results were unchanged.
-    
-    \item \textit{Females aged 40-49/COVID-19 booster reference:} Second, we used a counterfactual of COVID-19 vaccine uptake among women 40-49, assuming that pregnant people would have obtained the vaccine at rates similar to 40-49 year olds.  We computed this counterfactual:
-    \begin{align*}
-    p_m^{40-49} = \sum_{s} w_{s} p_{\text{a=40-49}sm}
-    \end{align*}
-    
-\end{enumerate}
+We first estimated the relative rates of vaccination between pregnant women and the counterfactual group in VSD states (Table \ref{tbl:VSD}). For each month ($m$), we estimated population vaccine series completion in the counterfactual group:
 
-Based on these, we estimated the relative risk of vaccination for each month between pregnant individuals and non-pregnant individuals in the VSD sample: $RR_m^{A}$ and $RR_m^{40-49}$. We used these relative risks to estimate pregnant vaccination in states outside of the VSD.
-
-
-\paragraph{Health outcomes and valuation.} 
-\begin{enumerate}
-    \item \textit{Maternal mortality from COVID-19 during pregnancy:} We obtained data on COVID-19 deaths during pregnancy from the CDC \citep{noauthor_data_2022}; we denoted deaths in month $m$ as $d_m$.
-    \item \textit{Stillbirth:} Stillbirth is defined as death after 20 weeks of gestation but before or during birth \citep{noauthor_stillbirth_nodate}.  
-    Prior to the delta variant, we assume an incremental absolute increase in stillbirth risk of 3 per 1000 among pregnant individuals; with the delta variant, this increased to 20 per 1000 (2 percentage points) \citep{desisto_risk_2021, stock_sars_cov_2_2022}.  We multiplied this by the number of diagnosed COVID-19 cases in pregnant people ($c_m$ in month $m$) to estimate monthly stillbirths due to COVID-19 ($s_m$) \citep{noauthor_data_2022}.
-\end{enumerate}
-
-\paragraph{Estimation.} 
-
-We calculated the observed value of information, assuming that given trial data, pregnant individuals would have had the uptake trajectory of the counterfactual group.  We omitted transmission effects because pregnant individuals are a sufficiently small and diffuse group that we expect these to be minimal; resulting bias would be conservatively.  
-
-We estimated morbidity and mortality costs (\$, millions) avertable with trial data under that counterfactual as:
 \begin{align*}
-h^{CF} = \sum_m RR_m^{CF}*VSL(d_m + s_m)
+r_m^{CF} = \sum_s \sum_{a} w_{as} r_{asm},
 \end{align*}
 
-\paragraph{Additional information.} 
+where $s$ indicates state, $a$ indicates age groups in a chosen counterfactual, $w_{as}$ indicates the weight given to a particular age group $a$ in state $s$ and $r_{asm}$ is the proportion of individuals in age group $a$ and state $s$ that had completed primary COVID-19 vaccination series by month $m$.
 
-To assess our extrapolation of the relative risk of vaccination from the VSD population to the general population, we compared the relative uptake of vaccination among pregnant versus non-pregnant individuals in and outside of VSD states with data the COVID-19 Trends and Impact Survey (CTIS).  CTIS was a cross-sectional internet survey that operated daily throughout the pandemic with over 20 million responses \citep{salomon_us_2021}. It included questions about both vaccine and pregnancy status; we calculated relative risks by month and these in VSD and non-VSD states. Although survey respondents are not fully representative of the US, even with weighting \citep{bradley_unrepresentative_2021}, the result suggested that our assumption was reasonable, and potentially conservative in terms of reduced relative uptake in non-VSD states. (Data analysis was deemed exempt human subjects research by the Brown University IRB, STUDY00000186.)
+We considered 3 values for $w_{as}$. For primary analysis, we obtained data on fertility rate by maternal age from National Vital Statistics \citep{vital_stats_2023} and combined this with female age-specific population estimates \citep{bureau_state_nodate} to construct weights to represent proportion of births in state $s$ and age group $a$. As sensitivity analyses, we considered weights representing the proportion of births in age group $a$ and location $s$, setting state population to enrollment population in VSD per Table \ref{tbl:VSD}, the proportion of the population, rather than births, in age group $a$ and state $s$, and for the 40-49 counterfactual, total births and total population in state $s$.
+
+We then estimated the relative vaccination rate as:
+\begin{align*}
+RR^{CF}_m = \frac{r_m^{CF}}{r_m^{preg, VSD}},
+\end{align*}
+
+where $r_m^{preg, VSD}$ represents the proportion of the pregnant VSD sample vaccinated at month $m$. 
+
+\paragraph{Extrapolation.} 
+We used these relative rates to estimate pregnant vaccination in states outside of the VSD. 
+
+<<>>=
+# read in data
+df = read.csv("./0_Data/1_Parameter_Estimates/table_s2.csv") 
+kable(df[,1:3] %>% arrange(-Enrollment), format = "latex", booktabs = T,
+  caption = "\\label{tbl:VSD}VSD Enrollment by Site. Sites were extracted from \\citep{lipkind_receipt_2022}. Enrollment figure sources are included in replication data (Table\\_S2\\_Sources).",
+  format.args = list(big.mark = ",")) %>%
+  kable_styling(font_size = 12, latex_options = "HOLD_position") %>%
+  row_spec(0,bold=TRUE)
+@
+
+To assess robustness of the assumption underlying extrapolation of the relative risk of vaccination from the VSD population to non-VSD states, we compared the relative uptake of vaccination among pregnant versus non-pregnant individuals in and outside of VSD states with data the COVID-19 Trends and Impact Survey (CTIS).  CTIS was a cross-sectional internet survey that operated daily throughout the pandemic with over 20 million responses \citep{salomon_us_2021}. It included questions about both vaccine and pregnancy status; we calculated relative risks by month and these in VSD and non-VSD states. Although survey respondents are not fully representative of the US, even with weighting \citep{bradley_unrepresentative_2021}, the result suggested that our assumption was reasonable, and potentially conservative in terms of reduced relative uptake in non-VSD states. (Data analysis was deemed exempt human subjects research by the Brown University IRB, STUDY00000186.)
 
 \begin{figure}[H]
     \centering
@@ -373,7 +351,42 @@ To assess our extrapolation of the relative risk of vaccination from the VSD pop
     \includegraphics[width = 4.5in]{2_Output/CTIS.png}
    \end{figure}
 
-\subsubsection{Dolutegravir}
+\paragraph{Health outcomes and valuation.} 
+
+Because vaccination took approximately 1-2 weeks to take full effect \citep{mahase_covid-19_2020, sadoff_safety_2021, baden_efficacy_2021} and the time from infection to death was 2-3 weeks during the study period \citep{illoh_utilization_2018, kasehagen_covid-19associated_2021, shim_clinical_2022}, we aligned vaccination rates at the midpoint of one month with health outcomes for the following month (i.e., 4 weeks before the midpoint of the month corresponding to health outcomes). In sensitivity analyses, we varied this by 2 weeks in either direction.
+
+\begin{enumerate}
+    \item \textit{Maternal mortality from COVID-19 during pregnancy:} We obtained data on COVID-19 deaths during pregnancy from the CDC \citep{noauthor_data_2022}; we denoted deaths in month $m$ as $d_m$.
+    \item \textit{Stillbirth:} Stillbirth is defined as death after 20 weeks of gestation but before or during birth \citep{noauthor_stillbirth_nodate}.  
+    Prior to the delta variant, we assumed an incremental absolute increase in stillbirth risk of 2.7 per 1000 among pregnant individuals; with the delta variant, this increased to 17 per 1000 \citep{desisto_risk_2021, stock_sars_cov_2_2022}.  We multiplied this by the number of diagnosed COVID-19 cases in pregnant people ($c_m$ in month $m$) to estimate monthly stillbirths due to COVID-19 ($s_m$) \citep{noauthor_data_2022}.
+\end{enumerate}
+
+\paragraph{Estimation.} 
+
+We calculated the observed value of information, assuming that given trial data, pregnant individuals would have had the uptake trajectory of the counterfactual group.  We omitted transmission effects because pregnant individuals are a sufficiently small and diffuse group that we expect these to be minimal; resulting bias would be conservatively. (See also replication code.)
+
+We estimated health effects and morbidity and mortality costs avertable with RCT data under that counterfactual as:
+\begin{align*}
+d^{CF} &= \sum_m RR_m^{CF}*d_m \\
+s^{CF} &= \sum_m RR_m^{CF}*s_m \\
+h^{CF} &= \sum_m RR_m^{CF}*VSL(d_m + s_m)
+\end{align*}
+
+\paragraph{Sensitivity analyses.} 
+
+\label{app:sens}
+\begin{center}
+\begin{figure}[H]
+\caption{\label{app:fig_sens_covid} Sensitivity analysis}  
+\includegraphics[width = 6in]{2_Output/sens_analysis.png} 
+\begin{figurenotes}
+    We present results by weight type and vaccination rate timing. Results were not sensitive to these assumptions.
+\end{figurenotes}
+\end{figure}
+\end{center}
+
+
+\subsection{Dolutegravir}
 
 \label{app:methods_dtg}
 We estimated expected mortality reduction from dolutegravir over alternative regimens based on Table 2 (row 3) of previous work \citep{dugdale_risks_2019}:
@@ -384,17 +397,16 @@ We estimated expected mortality reduction from dolutegravir over alternative reg
 
 where EFV refers to efavirenz (the alternative studied in comparison to dolutegravir) and DTG refers to dolutegravir.  These estimates used a 5-year time horizon \citep{dugdale_risks_2019}. Our calculation assumed mortality risk was constant over that horizon, an approximation selected based on the short time horizon and generally low risk profile of the target population.  Main results were not sensitive to small deviations of this parameter.
 
-Another estimate, which used a 20-year time horizon, projected a greater difference in mortality \citep{phillips_risks_2019} (Table 3, ``AIDS death rate in people on ART (per 100 person-years)").  While the base case death rate for non-dolutegravir regimens was similar at 1.7 deaths per 100 person-years (equivalent to 264,000 deaths for a cohort of 3.1 million over 5 years), they projected a decrease in mortality to 0.72 deaths per 100 person-years from dolutegravir-based regimens, which would correspond to 111,600 deaths per 100 person-years for a cohort of 3.1 million over 5 years.  We attribute this difference to non-linear effects on mortality over a longer time horizon, and use the lower estimate to be conservative, with the assumption that individuals on non-dolutegravir based regimens may switch to higher efficacy regimens over a longer time horizon. 
+Another estimate, which used a 20-year time horizon, projected a greater difference in mortality \citep{phillips_risks_2019} (Table 3, ``AIDS death rate in people on ART (per 100 person-years)").  While the base case death rate for non-dolutegravir regimens was similar at 1.7 deaths per 100 person-years (equivalent to 264,000 deaths for a cohort of 3.1 million over 5 years), they projected a decrease in mortality to 0.72 deaths per 100 person-years from dolutegravir-based regimens, which would correspond to 111,600 deaths per 100 person-years for a cohort of 3.1 million over 5 years.  We attributed this difference to non-linear effects on mortality over a longer time horizon, and used the lower estimate to be conservative, with the assumption that individuals on non-dolutegravir based regimens may switch to higher efficacy regimens over a longer time horizon. 
 
-Last, we compare our risk difference estimate to the corresponding risk ratio from \citep{dugdale_risks_2019} at \Sexpr{round(262800/276500, 2)}. This study assumes a base mortality rate of \Sexpr{round(276500/3100000*100,1)}\% over 5 years among a cohort of HIV positive individuals on or initiating treatment, approximately \Sexpr{round(276500/3100000/5*100,1)}\% per year. This mortality rate is similar to one estimate of overall HIV mortality among women 15-49 of childbearing age 
+Last, we compared our risk difference estimate to the corresponding risk ratio from \citep{dugdale_risks_2019} at \Sexpr{round(262800/276500, 2)}. This study assumed a base mortality rate of \Sexpr{round(276500/3100000*100,1)}\% over 5 years among a cohort of HIV positive individuals on or initiating treatment, approximately \Sexpr{round(276500/3100000/5*100,1)}\% per year. This mortality rate was similar to one estimate of overall HIV mortality among women 15-49 of childbearing age 
 %\Sexpr{round(as.numeric(gsub(",", "", df$Value[df$Code=="DTG.deaths.HIV"]))/(as.numeric(df$Value[df$Code=="DTG.n.tot.ART"])*1000000/as.numeric(df$Value[df$Code=="DTG.perc.preg.ART"])))}\% 
-\citep{unaids_aids_2019, noauthor_aidsinfo_nodate, who_hiv_2022}, which would make risk ratio and risk difference estimates similar, but does not account for deaths among individuals unexposed to ART. A lower base mortality rate among HIV positive individuals who have started ART may reduce the corresponding risk difference, but given limited data and the conservative estimate in \citep{dugdale_risks_2019} compared to \citep{phillips_risks_2019}, we deferred to the risk difference estimate.
+\citep{unaids_aids_2019, noauthor_aidsinfo_nodate, who_hiv_2022}, which would make risk ratio and risk difference estimates similar, but did not account for deaths among individuals unexposed to ART. A lower base mortality rate among HIV positive individuals who have started ART may reduce the corresponding risk difference, but given limited data and the conservative estimate in \citep{dugdale_risks_2019} compared to \citep{phillips_risks_2019}, we deferred to the risk difference estimate.
 
-\subsection{\textit{A Priori} Value of Information}
+\section{\textit{A Priori} Value of Information}
 \label{app:apriori_voi}
 
-
-\subsubsection{Thalidomide}
+\subsection{Thalidomide}
 \label{app:apriori_voi_thal}
 
 We obtained NNT to obtain \$100m health value:
@@ -404,30 +416,22 @@ We obtained NNT to obtain \$100m health value:
 
 Our AE multiplier was generated:
 \begin{align*}
-\frac{\text{8000 affected individuals with ILDs}}{200 \text{ treated individuals in RCT} \times 1/6 \text{ affected by ILDs}}*0.8\text{ for optimism downweighting}=192  
+\frac{\text{8000 affected individuals with ILDs}}{200 \text{ treated individuals in RCT} \times 1/6 \text{ affected by ILDs}}*0.8\text{ for optimism down-weighting}=192  
 \end{align*}
 
 All parameters are sourced in Table 2 (main text).
 
-\subsubsection{COVID-19}
+\subsection{COVID-19}
 
 At the start the pandemic, it was unknown how the pandemic would progress. Researchers in the spring and summer of 2020 when COVID-19 trials began would not have known, for example, about the larger impacts that the delta variant had relative to wildtype and alpha variants \citep{desisto_risk_2021, stock_sars_cov_2_2022}. 
 
-%Data on maternal and fetal deaths come from \citet{cdc_covid_death_data}; data on vaccination rates from \citet{stock_sars_cov_2_2022};
-
 Because there were substantial uncertainties, we explored the range of beliefs about vaccine risks and benefits to pregnant people and their offspring that could have substantially reduced the \textit{a priori} value of a vaccine trial. 
 \begin{enumerate}
-    \item \textit{Risks to pregnant people from COVID-19:} Pregnant people are typically at a higher risk of severe complications from viral infections like influenza \citep{malhame_moral_2020}.  Early in the pandemic, although maternal deaths were observed, most commonly during the second or third trimester, complications were less extreme than those observed in other novel coronaviruses, SARS-CoV-1 and MERS \citep{knight_characteristics_2020, hantoushzadeh_maternal_2020, schwartz_analysis_2020}.  Over the course of 2020 and early 2021, a substantial body of literature came to support the finding of increased adverse outcomes in pregnant people due to COVID-19 \citep[e.g.,][]{villar_maternal_2021, jering_clinical_2021}.  Based on these, we assume a reasonable prior would assign at least 90\% probability to the true outcome of a doubling of severe maternal outcomes with wild type COVID-19 and 10\% probability to the risk for pregnant individuals equivalent to risk in the age- and sex-matched population \citep{wang_association_2022}; a pessimistic would assume a 50\% probability of the true outcome.  
+    \item \textit{Risks to pregnant people from COVID-19:} Pregnant people are typically at a higher risk of severe complications from viral infections like influenza \citep{malhame_moral_2020}.  Early in the pandemic, although maternal deaths were observed, most commonly during the second or third trimester, complications were less extreme than those observed in other novel coronaviruses, SARS-CoV-1 and MERS \citep{knight_characteristics_2020, hantoushzadeh_maternal_2020, schwartz_analysis_2020}.  Over the course of 2020 and early 2021, a substantial body of literature came to support the finding of increased adverse outcomes in pregnant people due to COVID-19 \citep[e.g.,][]{villar_maternal_2021, jering_clinical_2021}.  Based on these, we varied prior belief about COVID-19 mortality during pregnancy from 0.05\% to 1\%.
     
-    \hspace{1em} We operationalize the lower prior by reducing $d_m$ to 90\% and 75\% of their original estimates for each month, respectively.
-    
-    \item \textit{Expected pandemic intensity post-vaccine availability:} With a high rate of circulating SARS-CoV-2, all people are at a higher risk of catching the virus; if vaccines had driven down COVID-19 to minimal levels in the population, achieving herd immunity, this risk would have been lower.  At the time of vaccine roll-out, the alpha variant had arisen, demonstrating evolutionary potential of the virus, but it was not yet known whether the virus would evolve to evade transmission benefits of the vaccine (even as protection against severe disease and death remained high). 
-    
-    \hspace{1em} To address the possibility of low incidence diminishing the value of a vaccine, we consider a scenario in which no delta variant arises and cases, ICU admissions, and deaths in pregnant people remain at the average of levels observed in May and June of 2021 for the study period.
+    \item \textit{Expected pandemic intensity post-vaccine availability:} With a high rate of circulating SARS-CoV-2, all people are at a higher risk of catching the virus; if vaccines had driven down COVID-19 to minimal levels in the population, achieving herd immunity, this risk would have been lower.  At the time of vaccine roll-out, the alpha variant had arisen, demonstrating evolutionary potential of the virus, but it was not yet known whether the virus would evolve to evade transmission benefits of the vaccine (even as protection against severe disease and death remained high). To address the possibility of low incidence diminishing the value of a vaccine or a new variant, we varied the expected probability of contracting COVID-19 during pregnancy from 0.5\%-10\%.
 
-    \item \textit{Risks to fetuses from COVID-19:} Perhaps the largest source of uncertainty was the risk of negative outcomes on fetuses. This uncertainty is significant both because there was weaker evidence about vaccines' fetal impacts and because the main conclusions above depend considerably on the fetal impacts of the vaccine. Early, small studies did not find significant effects on fetal outcomes, though these estimates often lacked power to detect rare events \citep[e.g.,][]{dube_covid-19_2020}. Findings of an increased risk of pre-term labor from COVID-19 exposure, as well as documented poor outcomes in pregnant people, were consistent with increased risks to the fetus \citep{villar_maternal_2021, jering_clinical_2021}.  
-    
-    \hspace{1em} Because the prior belief of risk of COVID-19-related stillbirth is a critical parameter to these estimates, we vary the risk difference in stillbirths with and without COVID-19 vaccines from 0 to 0.02. 
+    \item \textit{Risks to fetuses from COVID-19:} Perhaps the largest source of uncertainty was the risk of negative outcomes on fetuses. This uncertainty is significant both because there was weaker evidence about vaccines' fetal impacts and because the main conclusions above depend considerably on the fetal impacts of the vaccine. Early, small studies did not find significant effects on fetal outcomes, though these estimates often lacked power to detect rare events \citep[e.g.,][]{dube_covid-19_2020}. Findings of an increased risk of pre-term labor from COVID-19 exposure, as well as documented poor outcomes in pregnant people, were consistent with increased risks to the fetus \citep{villar_maternal_2021, jering_clinical_2021}. We varied the risk difference in stillbirths with and without COVID-19 vaccines from 0 to 2\%. 
 
 \end{enumerate}
 
@@ -436,27 +440,24 @@ We begin with a simple calculation, assuming an infection fatality similar to in
 \frac{\$100m}{0.001 \text{ IFR} \times 0.05\text{ probability of contracting COVID-19} *\$8m \text{ VSL}} = 250,000
 \end{align*}
 
-For AE multiplier, we multiplied 2019 live births (3.7 million) by 1-5\% \citep{martin_births_nodate} and divided by 1000 in a large RCT.
+For AE multiplier, we multiplied 2019 live births (3.7 million) by 1-5\% \citep{martin_births_nodate} and divided by 1000 assumed in a large RCT.
 
-For a more complex analysis, we compared the costs of an RCT to the total health benefits with the three dimensions of uncertainty. For each uptake counterfactual, we assumed a lower risk to pregnant people (uncertainty 1). We varied the COVID-19 incidences to either include the delta variant or not (uncertainty 2). We then varied prior belief about the risk difference in stillbirth with and without the COVID-19 vaccine (uncertainty 3).
+For a more complex analysis, we compared the costs of an RCT to the total health benefits varying the 3 types of uncertainty (above) and calculating NNT.
 
 \label{app:fig}
 \begin{center}
 \begin{figure}[H]
-\caption{\label{app:fig_voi_covid} Value of Information}  
-\includegraphics[width = 6in]{2_Output/covid_priors.png} 
-\begin{figurenotes}
-    This figure shows \textit{a priori} value of a COVID-19 vaccine RCT in pregnant individuals. The x-axis varies the prior belief about the impact of COVID-19 on stillbirth. The lines plot value across different levels of COVID-19 incidence (akin to wildtype rather than the delta variant) and RCT information impact (counterfactual). Columns vary maternal mortality reduction.
-\end{figurenotes}
+\caption{\label{app:fig_voi_covid} NNT across assumptions}  
+\includegraphics[width = 6in]{2_Output/nnt.png} 
 \end{figure}
 \end{center}
 
-\subsubsection{Dolutegravir}
+\subsection{Dolutegravir}
 \label{app:apriori_voi_dtg}
 
 We obtained NNT to obtain \$100m health value:
 \begin{align*}
-\frac{\$100m}{1.8\% \text{ mortality rate} \times 0.03 \text{ risk reduction} \times \$8m \text{ VSL}} = 23,501
+\frac{\$100m}{1.773\% \text{ mortality rate} \times 0.03 \text{ risk reduction} \times \$8m \text{ VSL}} \approx 23,501
 \end{align*}
 
 For our second AE multiplier benchmark, we multiplied the proportion of women exposed to dolutegravir prior to the erroneous Botswana safety signal (1.9\%) by annual pregnancies among women on ART (1.2 million) to obtain 22,800.

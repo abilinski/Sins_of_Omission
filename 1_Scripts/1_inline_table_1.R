@@ -1,5 +1,5 @@
 #### SETUP ####
-
+rm(list = ls())
 # set up relative paths
 library(here)
 source("global_options.R")
@@ -9,7 +9,6 @@ set.seed(02138)
 # read in the data
 df = read_excel("./0_Data/1_Parameter_Estimates/table_s1_r1.xlsx")
 df = df[!is.na(df$Code),]
-load("./2_Output/power_table.RData")
 
 # helpers
 vsl = as.numeric(df$Value[df$Code=="VSL"])
@@ -21,9 +20,11 @@ n.trial.large = 1000
 #### POWER CALCULATION ####
 
 # power function
-calc_pwr = function(n, baseline, trt_risk, n.sim = 10000, rule_out = 0, type = "wald",
+calc_pwr = function(n, baseline, trt_risk, n.sim = 100000, rule_out = 0, type = "wald",
                     pwr = 0.8, return = "diff", ni = F, sig = 0.05){
   out = foreach(i=1:n.sim, .combine = function(...) rbindlist(list(...), use.names = T)) %dopar% {
+    
+    set.seed(i)
     
     # draw from each distribution
     g1 = rbinom(1, size = round(n), prob = baseline)
@@ -76,6 +77,7 @@ pwr.thal.large = calc_pwr(n.trial.large, thal.baseline, thal.trt, type = "score"
 
 # deaths
 # incremental from trial
+# note exact value is ~12.4984999999999999 so it rounds to 12 in the text :) sprintf("%.16f", thal.death.rct)
 thal.death.rct = (n.trial*thal.trt - n.trial*thal.baseline)*thal.death.perc
 
 # observed in trial
@@ -107,10 +109,7 @@ thal.ild.rct.exp.diff.large = pwr.thal.large*(thal.surv.actual-(n.trial.large*th
 
 #### COVID-19 ####
 
-load(here("0_Data", "1_Parameter_Estimates", "covid_health_ests.RData"))
-
-# helper
-preg.n = as.numeric(gsub(",", "", df$Value[df$Code=="covid.preg.n"]))
+load(here("0_Data", "1_Parameter_Estimates", "covid_health_ests_v2.RData"))
 
 # trial size
 covid.deaths.actual = covid_health_vals$deaths.obs[1]
@@ -120,10 +119,8 @@ covid.sbs.actual = covid_health_vals$sb.obs[1]
 covid.death.min = min(covid_health_vals$n_deaths_averted)
 covid.death.max = max(covid_health_vals$n_deaths_averted)
 
-covid.death.rct = -n.trial*432/preg.n # what was this?
-
-covid.death.min.value = (covid.death.min-covid.death.rct)*vsl
-covid.death.max.value = (covid.death.max-covid.death.rct)*vsl
+covid.death.min.value = (covid.death.min)*vsl
+covid.death.max.value = (covid.death.max)*vsl
 
   # death percentages
   covid.perc.deaths_MAT.min = min(covid_health_vals$perc_deaths)
@@ -136,10 +133,8 @@ covid.death.max.value = (covid.death.max-covid.death.rct)*vsl
 covid.sb.min = min(covid_health_vals$n_stillbirths_averted)
 covid.sb.max = max(covid_health_vals$n_stillbirths_averted)
 
-covid.sb.rct = -n.trial*as.numeric(df$Value[df$Code=="covid.sb.w"])/1000
-
-covid.sb.min.value = (covid.sb.min-covid.sb.rct)*vsl
-covid.sb.max.value = (covid.sb.max-covid.sb.rct)*vsl
+covid.sb.min.value = (covid.sb.min)*vsl
+covid.sb.max.value = (covid.sb.max)*vsl
 
 # sb percentages
   covid.perc.sb_ALL.min = min(covid_health_vals$perc_sbs_averted)
@@ -156,8 +151,7 @@ dtg.deaths.survey = as.numeric(df$Value[df$Code=="DTG.perc.post.diff"])/100 * as
 dtg.deaths.total = as.numeric(df$Value[df$Code=="DTG.perc.post.diff"])/100 * as.numeric(df$Value[df$Code=="DTG.perc.red"]) * as.numeric(df$Value[df$Code=="DTG.n.tot.ART"])*1000000
 
 # trial
-dtg.death.rct = -n.trial*.00088
-dtg.deaths.rct.value = (dtg.deaths.total-dtg.death.rct)*vsl
+dtg.deaths.rct.value = (dtg.deaths.total)*vsl
 
 # trial power
 pwr.dtg = calc_pwr(n.trial, dtg.baseline, dtg.baseline*dtg.false.RR, type = "score", return = "abs")
@@ -165,10 +159,6 @@ pwr.dtg.small = calc_pwr(n.trial.small, dtg.baseline, dtg.baseline*dtg.false.RR,
 pwr.dtg.large = calc_pwr(n.trial.large, dtg.baseline, dtg.baseline*dtg.false.RR, type = "score", return = "abs")
 perc.two.ntds = (1-pbinom(2, n.trial, dtg.baseline*dtg.false.RR))*100
 perc.two.ntds.large = (1-pbinom(2, n.trial.large, dtg.baseline*dtg.false.RR))*100
-
-
-#### DOLUTEGRAVIR (HYPOTHETICAL) ####
-
 
 #### VALUE OF INFORMATION ####
 
