@@ -12,8 +12,8 @@ The Public Health Service Act (42 U.S.C. 242m(d)) provides that the data collect
 - Make no disclosure or other use of the identity of any person or establishment discovered inadvertently and advise the NCHS Confidentiality Officer of any such discovery.
 
 Confidentiality Officer:
-National Center for Health Statistics
-3311 Toledo Road
-Hyattsville, MD 20782
-Telephone 888-642-4159
+National Center for Health Statistics,
+3311 Toledo Road,
+Hyattsville, MD 20782,
+Telephone 888-642-4159,
 Email: nchsconfidentiality@cdc.gov
