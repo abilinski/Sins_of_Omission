@@ -11,7 +11,7 @@ The Public Health Service Act (42 U.S.C. 242m(d)) provides that the data collect
 - Make no attempt to learn the identity of any person or establishment included in these data.
 - Make no disclosure or other use of the identity of any person or establishment discovered inadvertently and advise the NCHS Confidentiality Officer of any such discovery.
 
-Confidentiality Officer
+Confidentiality Officer:
 National Center for Health Statistics
 3311 Toledo Road
 Hyattsville, MD 20782
