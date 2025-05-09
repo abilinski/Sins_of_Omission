@@ -1,0 +1,600 @@
+\documentclass[12pt]{article}
+\usepackage[USenglish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{bm}
+\usepackage{mathpazo}
+\usepackage{tabularx}
+\usepackage[lmargin=1.2in,rmargin=1.2in,tmargin=1.2in,bmargin=1.2in]{geometry}
+\usepackage{titlesec}
+\usepackage{graphicx, xcolor}
+\usepackage{wrapfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{paralist}
+\usepackage{arydshln}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{array}
+\usepackage{soul}
+\usepackage{bbding}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{epstopdf}
+\usepackage{etex}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+%\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{indentfirst}
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage{morefloats}
+\usepackage{multirow}
+\usepackage{pdfpages}
+\usepackage{pgffor}
+\usepackage{pgfplotstable}
+\usepackage[section]{placeins}
+\usepackage{rotating}
+\usepackage{setspace}
+\usepackage{subfig}
+\usepackage{subfiles}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage[normalem]{ulem}
+\usepackage{url}
+\usepackage{wasysym}
+\usepackage{bbm}
+
+
+\usepackage{xr}
+
+\makeatletter
+\newcommand*{\addFileDependency}[1]{% argument=file name and extension
+\typeout{(#1)}% latexmk will find this if $recorder=0
+% however, in that case, it will ignore #1 if it is a .aux or 
+% .pdf file etc and it exists! If it doesn't exist, it will appear 
+% in the list of dependents regardless)
+%
+% Write the following if you want it to appear in \listfiles 
+% --- although not really necessary and latexmk doesn't use this
+%
+\@addtofilelist{#1}
+%
+% latexmk will find this message if #1 doesn't exist (yet)
+\IfFileExists{#1}{}{\typeout{No file #1.}}
+}\makeatother
+
+\newcommand*{\myexternaldocument}[1]{%
+\externaldocument{#1}%
+\addFileDependency{#1.tex}%
+\addFileDependency{#1.aux}%
+}
+
+\usepackage{qting}
+\myexternaldocument{draft_Sins_Supplement_R1}
+
+\usepackage{array}
+\usepackage{csquotes}
+
+\usepackage{fancyhdr}
+\pagestyle{plain}
+
+\newcommand{\I}{\textrm{I}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\D}{\textrm{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+
+%%% To delay floats
+%\usepackage[nomarkers, nolists]{endfloat}
+%\makeatletter
+%\newenvironment{nodelayfig}[1][tp]{\@float{figure}[#1]}{\end@float}
+%\makeatother
+%\makeatletter
+%\newenvironment{nodelaytab}[1][tp]{\@float{table}[#1]}{\end@float}
+%\makeatother
+
+\renewcommand{\floatpagefraction}{.8}%
+
+%\titlelabel{\thetitle.\quad}
+
+%\usepackage{subcaption}
+
+
+% Spacing & Indentation
+% (use first line for final drafts, the other three for intermediate drafts)
+%\usepackage[doublespacing]{setspace}  %onehalfspacing  or doublespacing
+\setlength{\parskip}{1em} %0.5\baselineskip
+\setlength{\parindent}{0pt}
+\linespread{1.5}
+%\setlength{\extrarowheight}{5pt}
+
+% Titles
+%\usepackage{tocloft}
+%\usepackage[subfigure]{tocloft}
+%
+%\renewcommand\cftsecaftersnum{.} 
+
+\titleformat*{\section}{\Large\scshape\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titleformat*{\paragraph}{\bfseries}
+\titleformat*{\subparagraph}{\bfseries}
+
+\renewcommand{\thesection}{\Roman{section}} % 1.A. as subsections
+\renewcommand{\thesubsection}{\Alph{subsection}} % 1.A. as subsections
+
+\titlespacing{\section}{0pt}{0pt}{-10pt} %
+\titlespacing{\subsection}{0pt}{0pt}{-10pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
+\titlespacing{\paragraph}{0pt}{1pt}{5pt}
+\titlespacing{\subparagraph}{10pt}{1pt}{5pt}
+
+%\makeatletter
+%\def\remove@@dot\csname the#1\endcsname{\Roman{#1}}
+%\def\p@section{\remove@@dot}
+%\makeatother
+
+% Link Colors
+\usepackage{hyperref}
+\def\UrlBreaks{\do\/\do-}
+\definecolor{grey}{RGB}{64, 112, 133}
+\hypersetup{
+    colorlinks=true,
+    citecolor = {black},    % turns references blue
+    linkcolor=black, % turn all internal links (refs to other sections/figs/paragraphs)
+    urlcolor={black},  % turn external links (URLs) blue
+}
+
+
+% Captioning
+%\usepackage[font={footnotesize}]{subcaption}
+%\usepackage[font={footnotesize}]{caption}
+\usepackage{caption, setspace}
+\captionsetup{font={stretch=1}}
+\captionsetup[figure]{font={normalsize}, labelfont=normalsize}
+\captionsetup[table]{font={normalsize}, labelfont=normalsize}
+
+% to get figure and tablenotes the way we want them
+\newenvironment{tablenote}[1][Note]{\begin{minipage}[t]{\linewidth}\linespread{0.0}\footnotesize{\itshape#1: }}{\end{minipage}}
+\newenvironment{figurenotes}[1][Note]{\begin{minipage}[t]{\linewidth}\linespread{0.0}\footnotesize{\itshape#1: }}{\end{minipage}}
+
+
+\usepackage[format=hang,labelfont=bf]{caption}
+% Bibliography
+\usepackage{natbib}
+\bibliographystyle{unsrt}
+%\bibliographystyle{ieeetr}
+%\setcitestyle{authoryear, open={(},close={)}}
+
+
+\usepackage{titlesec}
+\usepackage[titletoc,toc,title]{appendix}
+
+
+\usepackage{tabto}
+\def\quoteattr#1#2{\setbox0=\hbox{#2}#1\tabto{\dimexpr\linewidth-\wd0}\box0}
+
+% table & graphics path
+\usepackage{graphicx}
+\makeatletter 
+\def\input@path{{"../../Output/sentiment_analysis/"}} 
+\makeatother
+\definecolor{dgreen}{RGB}{0, 100, 0}
+\definecolor{dred}{RGB}{139, 0, 0}
+
+
+\graphicspath{{"../../Output/sentiment_analysis/"}} 
+\makeatother
+
+
+% homemade commands
+\newcommand{\coded}[1]{\textcolor{black}{#1}}%#salmon
+\newcommand{\tabled}[1]{\textcolor{black}{#1}}%#salmon
+
+\definecolor{forestgreen}{rgb}{0.0, 0.55, 0.0}
+\definecolor{lavenderindigo}{rgb}{0.59, 0.48, 0.71}
+\newcommand{\FixMe}[1]{\textcolor{orange}{ #1}}
+\newcommand{\nedit}[1]{\textcolor{forestgreen}{ #1}}
+\newcommand{\aedit}[1]{\textcolor{lavenderindigo}{ #1}}
+
+
+%\newcommand{\Cut}[1]{\textcolor{red}{ #1}}
+%\newcommand{\Discuss}[1]{\textbf{\textcolor{blue}{ [#1]}}}
+%\newcommand{\Integrate}[1]{\textbf{\textcolor{blue}{ [#1]}}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\makeatother
+
+% tikz
+\usepackage{tikz}
+\tikzset{
+  treenode/.style = {shape=rectangle, 
+  align=center,
+  top color=white},
+  root/.style = {treenode, font=\normalsize},
+  env/.style = {treenode, font=\normalsize},
+  dummy/.style    = {circle,draw}
+}
+
+\usepackage{tabularx}
+\usetikzlibrary{fit}
+
+% header style
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+
+\cfoot{{\small \thepage}}
+
+% avoid unwanted hyphenation
+\usepackage[none]{hyphenat}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\raggedright
+
+ \begin{center} 
+ \singlespacing	
+ \thispagestyle{empty}
+
+\textbf{\scshape \Large Sins of Omission} \\ \vspace{0.75em}
+ {\large Model-based Estimates of the Health Effects of Excluding Pregnant \\ Participants from Randomized Controlled Trials\footnote{Bilinski \& Emanuel contributed equally. The views expressed are those of the authors and do not necessarily represent the views of the Federal Reserve Bank of New York or the Federal Reserve System. All errors are our own. Bilinski: Brown School of Public Health, \url{alyssa\_bilinski@brown.edu}. Emanuel: New York Federal Reserve Bank, \url{natalia@nataliaemanuel.com}. Ciaranello: Harvard Medical School. This paper represents the views of the authors and does not necessarily represent the views of the Federal Reserve of New York or Federal Reserve System.}} \\ 
+ \vspace{0.5em}
+ Alyssa Bilinski, PhD $\cdot$ Natalia Emanuel, PhD $\cdot$ Andrea Ciaranello, MD, MPH
+ \vspace{1em}
+ 
+  \vspace{0.5em}
+ %\today
+\end{center}
+
+\singlespacing
+
+% Add an R chunk
+% Sets options and working directory
+% Note -- R has a limited number of packages
+<<echo = F, warning = F, message = F>>=
+# set options to hide code and only show output
+knitr::opts_chunk$set(eval = TRUE, echo = FALSE, warning = F, message = F)
+
+# add libraries
+# note Overleaf has a limited number of libraries
+knitr::opts_knit$set(root.dir = "/compile")
+#setwd("/compile")
+library(knitr)
+library(tidyverse)
+library(scales)
+library(readxl)
+library(kableExtra)
+@
+
+% Load in results data
+<<>>=
+load("./2_Output/power_table.RData")
+load("./2_Output/t1_values.RData")
+@
+
+\newpage
+
+\section*{Abstract} 
+\textbf{Background.} Over 90 million women in the US have given birth. Randomized controlled trials (RCTs) of medications almost always exclude pregnant participants. 
+
+\textbf{Objective.} To quantify health effects of excluding pregnant participants from RCTs
+
+\textbf{Design.} Decision-analytic framework, applied to case studies of thalidomide, COVID-19 vaccines, and dolutegravir
+
+\textbf{Setting.} Varied
+
+\textbf{Participants.} Pregnant people and their children
+
+\textbf{Measurements.} We model \textit{ex post} health impact of RCTs, comparing projected health effects of medication uptake had an RCT been conducted to historically observed outcomes. We also model \textit{a priori} impact, that could have been anticipated in trial planning. We convert effect estimates to monetary value using standard benchmarks.
+
+\textbf{Findings.} Across case studies, we project that health benefits from conducting RCTs during pregnancy would far exceed expected AEs from RCTs. For example, had thalidomide been tested in a completed RCT with 200 treated participants, about \Sexpr{round(thal.death.rct.full+thal.ild.rct.full)} children would have experienced intercalary limb defects (ILDs), while knowledge from the RCT would have prevented \Sexpr{thal.death.actual+thal.surv.actual} (\Sexpr{round((thal.death.actual+thal.surv.actual-thal.death.rct.full-thal.ild.rct.full)/(thal.death.actual+thal.surv.actual)*100, 1)}\%) ILDs from 1956-1962. Likewise, if RCTs for COVID-19 vaccines had included pregnant participants and post-trial pregnant uptake were conservatively assumed to mirror that of age and state-matched non-pregnant women, we project that  \Sexpr{round(covid.perc.deaths_MAT.min*100)}\% of US COVID-19-related maternal deaths and stillbirths (\Sexpr{round(covid.perc.deaths_ALL.min*100)}\% of all maternal deaths and \Sexpr{round(covid.perc.sb_ALL.min*100)}\% of all stillbirths) would have been prevented from March-November 2021. 
+Projected \textit{a priori} value of RCT data would have exceeded the approximately \$100 million financial cost of Phase I-III RCTs.
+
+\textbf{Conclusion.} Systematic inclusion in RCTs could benefit both pregnant people and their children, by both speeding AE detection and increasing uptake of beneficial medications.
+
+\textbf{Limitations.} Parameter uncertainty
+
+\textbf{Primary Funding Source.} None 
+
+\pagebreak
+
+\section{Introduction}
+\doublespacing
+% Load in CPS data
+<<>>=
+c = read_csv("./0_Data/2_CPS_Fertility/birthed_ages.csv")
+c_inline = c[!is.na(c$Age),]
+@
+
+Over \Sexpr{10*floor(as.numeric(c_inline$TotalPopEverBirthed[c_inline$Age==85])/10000000)} million people in the US --- \Sexpr{round(100*as.numeric(c_inline$ShareEverBirthedAllAges[c_inline$Age==85]),0)}\% of women aged 18-85 --- have given birth at least once \citep{cps}. While randomized controlled trials (RCTs) are required for approval of new medications, these generally exclude pregnant participants \citep{mccarthy1994historical,blehar2013enrolling, scaffidi2017pregnant, bilinski_fewer_2025}. 
+Excluding pregnant participants from RCTs is intended to protect them and their fetuses from adverse effects (AEs) of new medications \citep{common_rule_subpart_b,fda_pregnant, fda_guidance_2018}.   
+
+Bypassing RCTs sharply contrasts with the medication review process for non-pregnant individuals, which requires RCTs prior to Food and Drug Administration (FDA) approval. Once medications are FDA-approved for general use, clinicians may prescribe them, absent clear contraindications, to pregnant individuals  \citep{fda_drug_info}. To inform recommendations, providers may draw on RCTs in non-pregnant populations, animal studies and post-marketing observational studies in pregnant individuals \citep{fda_guidance_2018, fda_drug_info}. Nevertheless, clinical guidance often emphasizes uncertainty about AEs in pregnancy due to inadequate human studies, with evidence insufficient to definitively recommend either continuing or avoiding medications  \citep{fda_drug_info}.
+
+\q{r2.minor.1}{Members of the medical community have advocated to conduct research, including RCTs, during pregnancy for over 30 years} \citep{mastroianni1994women}. Harms arising from the lack of research have been highlighted by policymakers and committees \citep{taskforce_2020,nas_2024}, providers \citep{blehar2013enrolling, lyerly2008second, van2018fair, van2021exclusion}, professional societies \citep{acog2021}, and the press \citep{szabo2022}. Still, pregnant people remain excluded from most trials by default, and the need for better data to guide evidence-based care persists \citep{taskforce_2020, riley2017improving,balch2022, couzin2022pregnancy, stock2019medicines}. Pregnant people frequently reduce or stop taking medications due to concerns about AEs \citep{tinker2015prevalence}.  Even so, 94\% use medications, on average 3-5 distinct drugs over the course of pregnancy, many of which lack rigorous safety data \citep{taskforce_2020, mitchell2011medication, haas2018prescription, cdc_2020}. 
+
+This paper develops a decision-analytic framework to estimate morbidity and mortality resulting from avoiding RCTs during pregnancy. We argue that avoiding RCTs slows uptake as patients and providers are hesitant to adopt medications with limited evidence \citep{morgan2010management}, which is detrimental when a medication is beneficial. \q{r2.minor.2}{Nevertheless, if a medication is harmful, more individuals experience AEs prior to detection in observational studies.} To illustrate these consequences, we apply our framework to case studies of medications with different profiles of hypothesized and true benefits and harms.  Our results highlight that conducting well-powered RCTs during pregnancy would improve health outcomes compared to relying upon post-marketing data.
+
+\section{Methods}
+
+% Read in main data
+% Load in parameter estimates table
+<<>>=
+options(scipen = 10000)
+df = read_excel("./0_Data/1_Parameter_Estimates/table_s1_r1.xlsx")
+df_inline = df[!is.na(df$Code),]
+df_inline$Value_KEEP <- df_inline$Value
+df_inline$Value <- as.numeric(sub(",", "", df_inline$Value))
+@
+
+\subsection{Analytic overview}
+
+We compared projected health impacts following RCTs to observed clinical outcomes, quantifying: (1) the \emph{ex post} value of RCTs that were not done, compared to health outcomes that were later observed and (2) the \textit{a priori} value that researchers could have anticipated prior to conducting an RCT.
+
+We considered three case studies (thalidomide, COVID-19 vaccines, and dolutegravir) representing different combinations of hypothesized and actual effects. For medications with substantial AEs, an RCT would have been beneficial if it reduced total uptake; for those without AEs, an RCT would have been beneficial if it increased total medication uptake (Table \ref{tab:framework}). 
+
+We first describe calculation of \emph{ex post} and \emph{a priori} value and then background and parameterization of each case study. 
+
+\subsection{\textit{Ex Post} RCT value: "What if a study had been done?"}
+We denote the \textit{ex post} value of an RCT as the difference in health outcomes had an RCT been conducted---thereby altering medication uptake---compared to historically observed health outcomes absent an RCT. To estimate this, we first projected expected health outcomes following a well-powered RCT, accounting for both RCT-related adverse events and change in uptake from RCT evidence. \q{two_AEs}{We assume that changes in behavior would have been driven by statistically significant benefits or AEs detected in RCTs or, for rare and severe AEs, from investigations triggered by at least 2 severe AEs in a treated arm} (see Supplement \ref{app:stat_tests} for discussion of non-inferiority tests for AEs). We then compared projected outcomes to observed outcomes in real-world data.
+
+\q{r2.samp.size1}{We assumed RCT sample sizes based on well-established clinical benchmarks. As a base case, we set a sample size of 200 per arm, the current pre-registered standard -- in an observational study design -- for the US Perinatal HIV Guidelines} \citep{noauthor_recommendations_2024}. 
+\q{r2.samp.size2}{This sample size is applied in the context of high-quality alternatives and considered sufficient to indicate ``a favorable risk-benefit balance compared with other ARV options, incorporating outcomes for pregnant people, fetuses, or newborns"} \citep{noauthor_recommendations_2024}. 
+\q{r2.samp.size3}{Specifically, a 200 first trimester exposure standard was derived by the Antiretroviral Pregnancy Registry (APR) to detect a doubling of major birth defects; an advantage of this benchmark is that it accounts for the fact that medications with teratogenic effects often cause multiple related AEs} 
+ \citep{heather_watts_teratogenicity_2007, noauthor_antiretroviral_nodate}.
+\q{r2.samp.size4}{As a range, we considered a lower bound of 50 people per arm, assuming a smaller, Phase I safety study} \citep{commissioner_step_2019}.
+\q{r2.samp.size5}{As an upper bound, we considered 1000 people per arm, a larger study, based on APR's pre-registered threshold for a 1.5 fold increase in major birth defects or a small-to-moderate Phase 3 study} \citep{commissioner_step_2019, heather_watts_teratogenicity_2007}.
+
+To inform whether an RCT would have merited its financial cost, we converted health effects to monetary value using the value of a statistical life \citep{noauthor_guidelines_2016, paltiel_clinical_2021}. These estimates were conservative, reflecting only mortality (\$\Sexpr{df_inline$Value[df_inline$Code=="VSL"]}m VSL) \citep{noauthor_guidelines_2016} and significant disability (using disability-adjusted life-year (DALY) weights and assuming \$100,000/DALY) \citep{global_burden_of_disease_collaborative_network_global_2020, kazibwe_use_2022, neumann_cost-effectiveness_2023, vanness_health_2021, phelps_new_2019}. Based on published data, we benchmarked these against combined Phase I-III RCT costs of \$\Sexpr{df_inline$Value[df_inline$Code=="RCT.cost"]}m 
+\citep{sertkaya2016key, martin2017much, moore_estimated_2018} (cost discussion in Supplement Methods \ref{app:trial_costs}).  (All parameters are listed in Table \ref{tbl:param}.)
+
+\subsection{\emph{A priori} RCT value: "How would trial planners have assessed the value of doing a trial before medication release?"}
+\q{apriori}{Although \emph{ex post} estimates quantify potential health benefits given known true effects of a medication, before starting a trial, researchers are uncertain about a medication's benefits and AEs \citep{heath_review_2017}. We therefore calculated the \textit{a priori} value of a trial, viewed from the perspective of planners prior to medication release. We summarized this in terms of two quantities: one related to the value of a trial if it produced expected health benefits and another for its value in the event of significant AEs. 
+
+For the first metric, we estimated the expected incremental number needed to treat ($NNT$) as a consequence of RCT data required to accrue \$100m in health benefits, assuming no side effects} \citep{sertkaya2016key, martin2017much, moore_estimated_2018}. 
+\q{NNT}{We calculated NNT:
+\begin{align*}
+NNT = \frac{\$100m}{\mathbb{E}\left(\text{DALYs averted per patient}\right) \times \$100,000\text{/DALY}}
+\end{align*}
+}
+\q{r2.ae.mult}{Second, we estimated a conservative AE multiplier ($m$) that researchers might reasonably have anticipated. This multiplier is defined as the expected ratio of adverse effects occurring before detection in post-marketing surveillance to those observed in an RCT. The greater number of adverse effects identified in post-marketing studies arises because not all individuals taking the medication are monitored outside of an RCT setting, and RCTs limit medication uptake prior to study conclusion. We calculate this:
+\begin{align*}
+m = \frac{\mathbb{E}\left(\text{AEs in post-marketing surveillance prior to detection}\right)}{\mathbb{E}\left(\text{AEs in RCT of sample size }n\right)}
+\end{align*}
+}
+
+\subsection{Thalidomide}
+We first briefly considered the canonical case of thalidomide, which was prescribed in Europe to treat morning sickness from 1956-1962 \citep{lenz1988}. Although animal studies did not detect teratogenic effects, thalidomide caused severe and often fatal ILDs \citep{lenz1966, lenz1988, yang1997return}. As a result, thalidomide triggered new safeguards around medication testing \citep{vargesson2015thalidomide}. \q{thal.just}{With modern safeguards, we would expect faster reaction from the medical community to remove medications with similar side effects from the market. Nevertheless, it remains instructive because it looms large as an example of medication risks during pregnancy and highlights how research could have reduced tragic health harms, even in the case of severe teratogens.}
+
+\paragraph{\emph{Ex post} value} \\
+To estimate the \textit{ex post} value of a pre-approval RCT, we assumed that if a significant increase in ILDs had been observed in a trial, there would have been no general population thalidomide uptake. (\q{end_early}{This is conservative because due to the rare and severe effects triggered, an RCT would likely have been discontinued early.}) We projected resulting impacts on two outcomes: deaths and ILDs \citep{yang1997return, lenz1966, lenz1988}. For each, we subtracted hypothetical RCT-related outcomes from observed outcomes and then converted these to monetary value. We assumed ILD disability weights of \Sexpr{df_inline$Value[df_inline$Code=="thal.disab.ild"]} and used German 1960 birth cohort life expectancy of \Sexpr{df_inline$Value[df_inline$Code=="thal.ild.duration"]} \citep{noauthor_federal_2023, global_burden_of_disease_collaborative_network_global_2020}.
+
+\paragraph{\emph{A priori} value}
+
+For \emph{a priori} value, we first quantified the NNT to achieve \$100m if thalidomide had eliminated nausea and vomiting without unanticipated side effects (DALY weight: \Sexpr{df_inline$Value[df_inline$Code=="thal.disab.nausea"]}, with expected duration \Sexpr{df_inline$Value[df_inline$Code=="thal.nausea.duration"]} days) \citep{global_burden_of_disease_collaborative_network_global_2020}. To quantify a conservative AE multiplier in post-marketing surveillance, we first considered that ILDs were among the most rare and severe AEs possible and calculated the ratio of observed AEs to AEs expected in an RCT, noting that detection for less striking AEs would likely have been slower, with few systems available to detect AEs at the time. To make this estimate more conservative, allowing for optimism about time to detect effects prior to roll-out, we reduced this multiplier by 20\%. (See calculations in Supplement \ref{app:apriori_voi_thal}.)
+
+\subsubsection{COVID-19 vaccines}
+
+We next considered COVID-19 vaccines. Pregnant participants were excluded from initial COVID-19 vaccine RCTs, despite objections \citep{beigi_need_2021, knight_include_2020, malhame_moral_2020, heath_inclusion_2020}. As a result, although vaccines were authorized under Emergency Use Authorization without contraindication in pregnancy by the FDA in December 2020 and some medical societies (e.g., American College of Obstetrician and Gynecologists (ACOG), Society for Maternal Fetal Medicine) endorsed them thereafter, the US Centers for Disease Control and Prevention did not recommend COVID-19 vaccination during pregnancy until August 2021 based on observational data \citep{dooling_advisory_2020, desisto_risk_2021, cdc_new_2016, noauthor_acog_2021}.  Uptake lagged accordingly among pregnant people \citep{noauthor_covid-19_nodate, noauthor_weekly_nodate}.
+
+\paragraph{\emph{Ex post} value}
+We modeled \textit{ex post} value of an RCT, \q{emp1}{assuming that if an RCT had demonstrated efficacy in pregnancy without significant safety signals, uptake among pregnant people would have increased, paralleling either: 1) women from the same age and state (``age- and state-matched'') or 2) women aged 40-49 from CDC data (``COVID-19 booster reference'')} \citep{noauthor_covid-19_nodate, noauthor_weekly_nodate}. 
+\q{emp2}{These uptake assumptions are conservative because pregnant people had \textit{higher} uptake of the 2019 influenza vaccine and COVID-19 boosters compared to both reference groups.} (Figure S3) (data and calculations in Supplement Methods C.1.).
+    
+We projected effects on maternal mortality from COVID-19 \citep{noauthor_data_2022} and stillbirths resulting from maternal COVID-19 infection \citep{noauthor_stillbirth_nodate} from March-November 2021 (prior to booster impacts), \q{inc.impact}{assuming 100\% vaccine effectiveness against the COVID-19-related maternal death and stillbirths during this time. This assumed that, with vaccination, rates of maternal death and stillbirth would have matched background rates absent COVID-19 infection.} Prior to the delta variant, we assumed an incremental absolute increase in stillbirth risk of \Sexpr{df_inline$Value[df_inline$Code=="covid.sb.w"]} per 1000 among pregnant individuals with COVID-19; with the delta variant, this increased to \Sexpr{df_inline$Value[df_inline$Code=="covid.sb.d"]} per 1000 \citep{desisto_risk_2021, stock_sars_cov_2_2022}. 
+\q{vsl}{For both maternal mortality and stillbirths, we assumed a VSL of \$\Sexpr{df_inline$Value[df_inline$Code=="VSL"]}m. We varied stillbirth VSL in sensitivity analysis.} 
+
+\paragraph{\emph{A priori} value}
+For COVID-19 vaccines, we considered different prior beliefs about the therapeutic benefit of the vaccine (e.g., the risk reduction in maternal mortality and stillbirths from COVID-19), the impact of herd immunity, and vaccine AEs and identified NNTs for health value exceeding \$100m.  We then considered the multiplier on AEs that would have occurred if 1-5\% of pregnant individuals who planned to give birth were vaccinated prior to detection. This was low in contrast to 2019 influenza vaccine uptake of 61\% (Figure \ref{app:fig_comp_cf}); even with gradual roll-out, potential fetal AEs may not have been detectable until several months after administration (e.g., at a 20-week ultrasound).
+
+\subsubsection{Dolutegravir}
+
+We last considered dolutegravir, an antiretroviral medication used for HIV treatment, as an example of a medication for which inconclusive observational evidence suggested potentially severe AEs, but additional data proved concerns unfounded \citep{mofenson_optimizing_2019}.  Dolutegravir was approved in the US in 2013 and recommended over other regimens due to high efficacy, low likelihood of development of medication-resistant virus, and reduced AEs \citep{ciaranello_time_2022}.  Botswana was one of the first countries to offer dolutegravir for all adults and adolescents with HIV, including those of childbearing potential, in 2016. In a surveillance sample of 426 infants, they observed a high rate of neural tube defects (NTDs) (0.94\%, \Sexpr{df_inline$Value[df_inline$Code=="DTG.false.signal"]}-fold higher than in the general population or in infants exposed to other HIV therapies) \citep{zash_neural-tube_2018, zash_comparative_2018, noauthor_neural_nodate}. This led World Health Organization to caution against dolutegravir in people who might conceive, and many countries refused to offer dolutegravir to women \citep{noauthor_updated_nodate2, romo_disparities_2022}.  Subsequent larger birth surveillance studies did not find increased risk of NTDs, and in 2019 the WHO reversed course and recommended dolutegravir, but uptake among women of childbearing age continues to lag \citep{romo_disparities_2022, noauthor_who_nodate}. 
+
+\paragraph{\emph{Ex post} value}
+For our \emph{ex post} analysis, we considered the events of 2018 described above, in which dolutegravir was thought to be harmful but was, in fact, beneficial. We assumed that if an RCT had found reassuring safety data in 2018, uptake among women of 16-49 would have paralleled the rise in uptake among men \citep{romo_disparities_2022}. We then quantified mortality impacts over a 5-year period, first in a survey sample measuring uptake trends \citep{romo_disparities_2022} and next in the global HIV population, assuming similar uptake patterns in both, and based on previously-modeled estimates of dolutegravir's mortality reduction compared to other regimens \citep{dugdale_risks_2019} (Supplement Methods \ref{app:methods_dtg}).
+
+\paragraph{\emph{A priori} value}
+
+For our \emph{a priori} analysis, we quantified NNT assuming that the anticipated mortality of dolutegravir would be at least that of efavirenz, the previous standard of care, compared to its predecessor, nevirapine \citep{ouattara_projecting_2012}. We calculated an AE multiplier first based on the percentage of US HIV-positive pregnancies enrolled in the US Antiretroviral Pregnancy Registry \citep{short_safety_2024}. Because the US represents a small proportion of HIV cases, with more limited surveillance in some settings, we benchmarked this against an estimate of the number of individuals exposed to dolutegravir prior to safety signal detection \citep{romo_disparities_2022}. (See calculations in Supplement \ref{app:apriori_voi_dtg}.)
+
+\section{Results}
+
+\subsection{Thalidomide}
+
+About \Sexpr{round(thal.death.actual + thal.surv.actual)} infants were affected by thalidomide-related AEs, of whom \Sexpr{round(thal.death.actual)} died shortly after birth. An RCT with 200 participants per arm, taken to completion, would have had nearly 100\% power to detect ILDs and prevented at least \Sexpr{round(thal.death.actual + thal.surv.actual-thal.death.rct.full-thal.ild.rct.full)}
+ births from being affected by thalidomide, including \Sexpr{round(thal.death.actual-thal.death.rct.full)} infant deaths and \Sexpr{round(thal.surv.actual-thal.ild.rct.full)}} limb deficiencies. 
+This would have corresponded to \$\Sexpr{round((thal.death.rct.value+thal.ild.rct.value)/1000)}b 
+in health value---\$\Sexpr{round(thal.death.rct.value/1000)}b 
+from mortality averted, and \$\Sexpr{round(thal.ild.rct.value/1000)}b 
+from limb deficiencies averted.
+
+If researchers had first conducted a smaller safety trial with 50 individuals per arm, the population-level impact would have depended on response to trial information. With \Sexpr{round(pwr.thal.small*100)}\% power to detect a statistically significant ILD AE, the trial would have averted an expected \Sexpr{round(thal.death.rct.exp.diff.small+thal.ild.rct.exp.diff.small)} ILDs if distribution stopped after a statistically significant effect. Nevertheless, there would have been a >\Sexpr{floor(perc.two.ilds)}\% chance of at least 2 ILDs observed in the trial, and if this information had been sufficient to prevent distribution, the trial would have averted an expected \Sexpr{round(1/pwr.thal.small*(thal.death.rct.exp.diff.small+thal.ild.rct.exp.diff.small))} AEs. Even the largest RCT size (n = 1000 per arm), taken to completion, would have markedly reduced health impacts, averting an expected \Sexpr{round(thal.death.rct.exp.diff.large+thal.ild.rct.exp.diff.large)} AEs.  
+
+\subsubsection{A priori value}
+
+If thalidomide had reduced severe nausea and vomiting during pregnancy without any AEs, and if these RCT data increased uptake of \Sexpr{comma(thal.voi.n)} women, the health value from averted DALYs would have exceeded the \$100m cost of a trial. We estimate that across side effects an AE multiplier of at least \Sexpr{round(thal.m)} prior to detection in post-marketing surveillance compared to an RCT. 
+
+\subsection{COVID-19 vaccines}
+
+COVID-19 vaccination among US pregnant people fell below rates in both comparison groups (Figure \ref{fig:covid_uptake}). If RCT data had existed and had improved uptake to age, sex, and state-matched levels, we estimated that \Sexpr{round(covid.death.min)} maternal deaths and \Sexpr{round(covid.sb.min)} stillbirths would have been prevented from March-November 2021; if uptake had improved to our ``COVID-19 booster reference" levels, these estimates increased to \Sexpr{round(covid.death.max)} maternal deaths and \Sexpr{round(covid.sb.max)} stillbirths.  This would have averted \Sexpr{round(covid.perc.deaths_MAT.min*100)}-\Sexpr{round(covid.perc.deaths_MAT.max*100)}\% of COVID-19-related AEs from March-November 2021 (\Sexpr{round(covid.perc.deaths_ALL.min*100)}-\Sexpr{round((covid.perc.deaths_ALL.max)*100)}\% of all maternal deaths and 1\%} of all stillbirths). In monetary terms, age- and state-matched uptake and COVID-19 booster uptake would have led to savings of \$\Sexpr{round((covid.death.min.value+covid.sb.min.value)/1000,1)} and \Sexpr{round((covid.death.max.value+covid.sb.max.value)/1000,1)}b, respectively: \$\Sexpr{round(covid.death.min.value)}-\Sexpr{round(covid.death.max.value)}m from maternal outcomes averted and \$\Sexpr{round(covid.sb.min.value/1000,1)}-\Sexpr{round(covid.sb.max.value/1000,1)}b from fetal/infant outcomes averted. With stillbirths valued at \$1m rather than \$\Sexpr{df_inline$Value[df_inline$Code=="VSL"]}m, the corresponding range was \$\Sexpr{round((covid.death.min.value+covid.sb.min.value/8)/1000,1)}-\Sexpr{round((covid.death.max.value+covid.sb.max.value/8)/1000,1)}b.  
+
+\subsubsection{\emph{A priori} value}
+
+For COVID-19 vaccines, we estimated substantial \textit{a priori} RCT value across a range of assumptions (Figure S6). For example, even with reduced maternal COVID-19 mortality risk  of 0.1\% (below studies such as \citep{villar_maternal_2021, jering_clinical_2021}, an assumed 5\% of contracting COVID-19 during pregnancy, and no COVID-19-related fetal risk, the value of a trial that included pregnant women in 2020-2021 would have exceeded \$100m with 250,000 incremental pregnant people vaccinated, 7\% of annual live births. We estimate an \textit{a priori} AE multiplier of 37-185, assuming 1-5\% of pregnant individuals planning to give birth would be vaccinated prior to detection. For reference, we estimated over 6\% pregnant uptake by the end of February 2021. % See 0_covid.R script for 6\% estimate
+
+
+
+\subsection{Dolutegravir}
+
+Because dolutegravir decreased mortality relative to other regimens, we estimated that low uptake among women of 16-49 after the erroneous safety signal (Figure \ref{fig:dolutegravir}, \citep{romo_disparities_2022}]) led to \Sexpr{round(dtg.deaths.survey)} 
+additional deaths in the survey sample \citep{romo_disparities_2022} used for parameterization and, extrapolating to all women on ART between 15-49, \Sexpr{round(dtg.deaths.total)} total deaths, 
+corresponding to a \$\Sexpr{round(dtg.deaths.rct.value/1000)}b 
+loss of life.
+
+Had a trial of 200 individuals per arm conducted, it would have had minimal (<1\%) power to the increase of NTDs to 1\% in the safety signal. However, larger trial sample sizes could have detected these AEs: a study of 1000 individuals per arm would have \Sexpr{round(pwr.dtg.large*100)}\% power to detect an effect and >\Sexpr{floor(perc.two.ntds.large)}\% to detect two NTDs.
+
+\subsubsection{\emph{A priori} value}
+ 
+For NNT, we estimated that with post-trial incremental uptake of \Sexpr{comma(round(dtg.voi.n))} individuals (<\Sexpr{round(dtg.voi.n.perc*100,1)}\% of women 15-49 on ART globally), the anticipated reduction in mortality would have been sufficient to justify a \$100m trial. For a conservative multiplier on AEs prior to side effect detection, we noted that 1 in 7 pregnancies are enrolled in the US ART Registry. % See estimates from 0_Data/1_Parameter_Estimates/APR*
+However, we estimated that approximately \Sexpr{comma(dtg.n.take)}  
+pregnancies were exposed to dolutegravir globally prior to the erroneous safety signal, a multiplier of approximately 23 on this AE prior to detection compared to what could have been achieved in a large RCT (n=1000). 
+
+\section{Discussion}
+
+Although excluding pregnant people from RCTs is intended to prevent harm to them and their offspring, it may, in fact, achieve the opposite: this practice exposes more people to AEs and allows fewer to access the benefits of medical advances than would RCTs. Even conservative estimates of morbidity and mortality associated with excluding pregnant people from RCTs in our three modeled case studies are substantial. \q{r3.preg.spec}{When converted to monetary value, these health impacts exceed estimated financial costs of including pregnant people in RCTs, either through general trials with sufficient pregnant participants to conduct subgroup analysis or through pregnancy-specific RCTs}. 
+
+For the large number of medications that are currently permitted---but not explicitly recommended---during pregnancy, the dearth of RCT data forces stressful and uncertain decisions onto pregnant people and their providers \citep{fda_guidance_2018, couzin2022pregnancy}.  
+\q{r2.2.1}{Where observational evidence is available, it requires a larger number of individuals to be exposed to a medication because many users are not observed by researchers, and there is a risk of biased participant samples producing misleading conclusions} \citep{bird_enrollment_2018}. 
+\q{r2.2.2}{While RCTs would not obviate the need for observational research to detect rare effects and may be useful for studies for which a control group is not needed (e.g., some pharmacokinetic studies), increased efforts to perform RCTs on medications during pregnancy would improve the welfare of both pregnant people and their children.}
+
+Several policy interventions could support increased research on medications during pregnancy and have been endorsed by groups including the ACOG and the Task Force on Research Specific to Pregnant Women and Lactating Women \citep{taskforce_2020, acog2021}. \q{r2.FDA}{These include reducing barriers to research in pregnant people (e.g., FDA removal of pregnant women from classification as a vulnerable group following HHS and international guidelines) and setting stronger requirements to promptly conduct animal studies during pregnancy and, pending results, conduct trials in pregnant people \citep{taskforce_2020}.}
+There are likewise funding and logistical levers to support research, such as expanding grant timelines to account for slower enrollment \citep{taskforce_2020} and \q{r3.liability}{addressing actual and perceived liability concerns, as a 2024 committee through the National Academy of Science, Engineering, and Medicine proposed} \citep{nas_2024}. Last, there is a need for investigation into AEs of greatest interest to patients and providers \citep{taskforce_2020}, to balance powering trials adequately with the financial and logistical costs of larger sample sizes. In our analysis, we focus on aggregate endpoints (e.g., any fetal abnormality) due to shared biological pathways, the justification used to guide the 200 exposures standard for US Perinatal HIV Guidelines \cite{noauthor_recommendations_2024}.
+
+Our study has several limitations. Our case studies use select, simplified examples of medications salient during pregnancy, and there is considerable uncertainty in our projections, rendering our results qualitative illustrations rather than precise quantitative estimates. \q{r.complex}{In practice, patients and providers may have to weigh complex AE risks against significant clinical benefits, rather than being able to declare a drug ``safe" or ``unsafe," and there is a complex interplay between evidence, clinical guidelines, and patient behavior.} Nevertheless, we demonstrate that across a broad range of circumstances, it would remain beneficial to conduct well-powered RCTs. Further work could assess the sensitivity of these results to different circumstances and nuances (e.g., variation across pregnancy trimesters and AE types) to prioritize efforts to fill gaps in evidence \citep{taskforce_2020}.
+
+\q{r1}{Despite these, our results suggest a need to reconsider the current default of excluding pregnant participants from RCTs and in doing so, causing larger passive harms to avoid the lesser harms of adverse effects incurred by research.}  There would be substantial value --- both to pregnant people and their offspring --- from systematically enrolling pregnant participants in RCTs.
+
+\newpage
+
+\section{Grant Support}
+The authors received no extramural funding for this work. This work represents the views of the authors and not the official views of the Federal Reserve of New York or the Federal Reserve System.
+
+\section{Data Access}
+Alyssa Bilinski and Natalia Emanuel had full access to all the data in the study and take responsibility for the integrity of the data and the accuracy of the data analysis. Alyssa Bilinski’s address is 121 South Main Street, 8th Floor, Providence, RI 02903.
+
+\section{Reproducible Research}
+Formatted data and code will be made publicly available on GitHub.
+
+\section{Acknowledgements}
+We gratefully acknowledge feedback and suggestions from Simona Dalin, Jeffrey W. Eaton, Scott Grosse, Alyssa Huberts, Joshua A. Salomon and Jesse Welch.
+
+
+\singlespacing
+\bibliography{pregnancy_trials}
+
+\newpage
+\FloatBarrier
+%%%%%%%%%%%% Tables
+
+%%%%%%%%%%%% Tables
+
+\begin{table}[H]
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\begin{center}
+\caption{Framework}\label{tab:framework}
+    \begin{tabular}{L{3.7cm}|L{4cm}|L{4.8cm}}
+    \hline
+    & \textbf{True effect: Harmful}  & \textbf{True effect: Beneficial} \\ \hline
+ \textbf{Hypothesized effect: Beneficial} & {Uptake leads to unnecessary adverse effects}  & {Limited uptake prevents treatment benefits} \\ 
+ & \textit{Thalidomide}  & \textit{COVID-19 vaccines} \\ \hline
+ \textbf{Hypothesized effect: Harmful}  & & {Limited uptake prevents treatment benefits} \\
+ &  & {\textit{Dolutegravir (HIV)}} \\  \hline
+    \end{tabular}
+    \end{center}
+    \begin{tablenote}
+   In each box, we describe health harms arising from individuals acting on prior assumptions or beliefs about the effect of a medication, compared to definitive evidence.  For the bottom row, we assume that potential harms are sufficiently uncertain such that an RCT would still meet standards for clinical equipoise required for ethical conduct of research.
+    \end{tablenote}
+\end{table}
+
+<<>>=
+# read in data
+df = read_excel("./0_Data/1_Parameter_Estimates/table_s1_r1.xlsx") %>%
+  mutate(Value = ifelse(nchar(Value)>10&Value!="time-varying", as.character(as.numeric(Value)), Value))
+
+# table
+options(knitr.kable.NA = '')
+kable(df[,1:4], format = "latex", escape = F, booktabs = T,
+  caption = "\\label{tbl:param}Model parameters.") %>%
+  column_spec(4, width = "10em") %>%
+  column_spec(2, width = "25em") %>%
+  column_spec(1, width = "10em") %>%
+  kable_styling(font_size = 7.5, latex_options = "HOLD_position") %>%
+  row_spec(0,bold=TRUE)
+@
+
+<<>>=
+df = df[!is.na(df$Code),]
+@
+
+\begin{landscape}
+\thispagestyle{empty}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\begin{table}[ht!]
+\scriptsize
+    \centering
+    \caption{RCT Value Summary}\label{tab:rct_value}
+\begin{tabular}{L{2.0cm} L{3cm} L{3cm} L{2.5cm} L{2cm} L{1.5cm} L{2cm} L{2.4cm}} 
+    \toprule
+    & & & & \multicolumn{2}{c}{\textbf{\emph{Ex post} RCT value}} & \multicolumn{2}{c}{\textbf{\emph{A priori} RCT value}}  \\
+    \cmidrule(lr){5-6}\cmidrule(lr){7-8} \\
+
+    \textbf{Medication} & \textbf{Adverse outcome type} & \textbf{Avoidable adverse outcomes prior to conclusive evidence}$^{(a)}$ & \textbf{Adverse outcomes during RCT (n=200)}$^{(b)}$ & \textbf{Net health effects} & \textbf{Net value (\$)}$^{(c)}$ & \textbf{Number needed to treat for \$100m health value} & \textbf{AE multiplier in post-marketing surveillance}  \\
+    \midrule 
+
+    % Thalidomide
+    \textbf{Thalidomide} & \textit{From use of dangerous medication:} & ~ & ~ & ~ & \textbf{\$\Sexpr{comma(round(thal.death.rct.value + thal.ild.rct.value))}} & \textbf{\Sexpr{comma(thal.voi.n)}} & \textbf{\Sexpr{round(thal.m)}}  \\ 
+    ~ & Perinatal mortality & \Sexpr{round(thal.death.actual)} deaths & \Sexpr{round(thal.death.rct)} deaths & \Sexpr{round(thal.death.actual-thal.death.rct)} deaths & \$\Sexpr{comma(round(thal.death.rct.value))} &  &   \\ 
+    ~ & Intercalary limb defects & \Sexpr{thal.surv.actual} cases & \Sexpr{round(thal.ild.rct)} cases & \Sexpr{round(thal.surv.actual-thal.ild.rct)} cases & \$\Sexpr{round(thal.ild.rct.value)} &  &   \\ \hline
+
+    % COVID vaccines        
+    \textbf{COVID-19 vaccines}$^{(c)}$ & \textit{From under-use of vaccine:} & ~ & ~ & ~ & \textbf{\$\Sexpr{comma(round(covid.death.min.value + covid.sb.min.value))}} & \textbf{62,500} & \textbf{35-175} \\ 
+    ~ & Maternal mortality & \Sexpr{round(covid.death.min)} deaths & - & \Sexpr{round(covid.death.min)} deaths & \$\Sexpr{round(covid.death.min.value)} & & \\ 
+    ~ & Stillbirths & \Sexpr{round(covid.sb.min)} stillbirths & - & \Sexpr{round(covid.sb.min)} stillbirths & \$\Sexpr{comma(round(covid.sb.min.value))} & &  \\ \hline
+
+    % DTG (true)
+    \textbf{Dolutegravir} & \textit{From under-use of medication:} & ~ & ~ & ~ & \textbf{\$\Sexpr{comma(round(dtg.deaths.rct.value))}} & \textbf{\Sexpr{comma(round(dtg.voi.n))}} & \textbf{7-23} \\ 
+    ~ & Mortality among women of childbearing age & \Sexpr{round(dtg.deaths.total)} deaths & - & \Sexpr{round(dtg.deaths.total)} deaths & \$\Sexpr{comma(round(dtg.deaths.rct.value))} &   & \\
+    \bottomrule
+\end{tabular}
+
+    \begin{tablenote}
+   For each of the quadrants from Table \ref{tab:framework}, we include an example medication, calculate the ex-post health value of an RCT by comparing the benefits of altered uptake to the realized uptake (column 4), compare the adverse outcomes that would arise in an observational study and an RCT (columns 5 and 6), and calculate the health savings from an RCT relative to the realized outcomes and to observational studies (columns 7 and 8). \\
+   $^{(a)}$ Avoidable adverse outcomes include the number of adverse outcomes that occurred in the real world before the true effects of the medication were understood that would have been prevented with RCT data and resulting uptake shifts. In the case of (truly) harmful medications, we calculate the incremental number of adverse events resulting from medication use.  In the case of (truly) beneficial medications, we calculate adverse outcomes that would have been averted if uptake paralleled that in other groups. \\
+$^{(b)}$ RCT calculations are based off sample sizes of 200 per arm (range 50-1000). \\
+$^{(c)}$ Estimates displayed use the age- and state-matched comparison group.
+    \end{tablenote}
+\end{table}
+\end{landscape}
+
+\begin{center}
+\begin{figure}[H]
+\caption{COVID-19 Vaccine Uptake \& Value}
+\centering
+Panel A: COVID-19 Vaccine Uptake by Demographic Group\\
+\includegraphics[width = 5in]{2_Output/covid_uptake_counterfactuals.png} \\
+Panel B: Cumulative Health Value in Averted Maternal Deaths and Stillbirths\\
+\includegraphics[width = 5in]{2_Output/covid_savings_counterfactuals_cumulative_bounds.png}\\
+\label{fig:covid_uptake}
+\begin{figurenotes}
+   Panel A displays the cumulative percentage of the population with 2 COVID-19 vaccine doses, by different age groups and among pregnant individuals from February to November 2021. Panel B shows the \textit{ex-post} value of an RCT: the cumulative health benefit in millions of dollars that would have been achieved if pregnant uptake matched that of the age- and state-matched females or a reference group based on COVID-19 booster uptake during pregnancy, exceeding that of 40-49-year-old females. The black dashed horizontal line shows \$100 million, estimated Phase I-III RCT costs. 
+\end{figurenotes}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[H]
+\centering
+\caption{Dolutegravir Uptake and Value}
+Panel A: Dolutegravir Uptake by Demographic Group\\
+\includegraphics[width = 5in]{2_Output/dolutegravir_uptake.png} \\
+Panel B: Cumulative Health Value in Averted Deaths and ICU Stays\\
+\includegraphics[width = 5in]{2_Output/dolutegravir_uptake_counterfactual_bounds.png} \\
+\label{fig:dolutegravir}
+\begin{figurenotes}
+ Panel A shows survey-estimated dolutegravir uptake by age and sex over time from \citep{romo_disparities_2022}. Panel B shows the \textit{ex-post} value of an RCT: the cumulative health benefit in millions of dollars that would have been achieved by aligning the dolutegravir uptake trajectory among the female 16-49 population with that from age-matched men. The black dashed horizontal line shows \$100 million, estimated Phase I-III RCT costs. 
+\end{figurenotes}
+\end{figure}
+\end{center}
+
+\end{document}
+

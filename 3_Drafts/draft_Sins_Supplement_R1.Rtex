@@ -1,0 +1,475 @@
+\documentclass[12pt]{article}
+\usepackage[USenglish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{bm}
+\usepackage{mathpazo}
+\usepackage{tabularx}
+\usepackage[lmargin=1.2in,rmargin=1.2in,tmargin=1.2in,bmargin=1.2in]{geometry}
+\usepackage{titlesec}
+\usepackage{graphicx, xcolor}
+\usepackage{wrapfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{paralist}
+\usepackage{arydshln}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{array}
+\usepackage{soul}
+\usepackage{bbding}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{epstopdf}
+\usepackage{etex}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+%\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{indentfirst}
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage{morefloats}
+\usepackage{multirow}
+\usepackage{pdfpages}
+\usepackage{pgffor}
+\usepackage{pgfplotstable}
+\usepackage[section]{placeins}
+\usepackage{rotating}
+\usepackage{setspace}
+\usepackage{subfig}
+\usepackage{subfiles}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage[normalem]{ulem}
+\usepackage{url}
+\usepackage{wasysym}
+\usepackage{bbm}
+\usepackage{caption}
+
+\usepackage{array}
+\usepackage{csquotes}
+
+\newcommand{\I}{\textrm{I}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\D}{\textrm{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+
+\makeatletter
+\renewcommand \thesection{\@arabic\c@section}
+\captionsetup[figure]{name=Supplemental Figure}
+\captionsetup[table]{name=Supplemental Table}
+
+\makeatother
+
+%%% To delay floats
+%\usepackage[nomarkers, nolists]{endfloat}
+%\makeatletter
+%\newenvironment{nodelayfig}[1][tp]{\@float{figure}[#1]}{\end@float}
+%\makeatother
+%\makeatletter
+%\newenvironment{nodelaytab}[1][tp]{\@float{table}[#1]}{\end@float}
+%\makeatother
+
+\renewcommand{\floatpagefraction}{.8}%
+
+%\titlelabel{\thetitle.\quad}
+
+%\usepackage{subcaption}
+
+
+% Spacing & Indentation
+% (use first line for final drafts, the other three for intermediate drafts)
+%\usepackage[doublespacing]{setspace}  %onehalfspacing  or doublespacing
+\setlength{\parskip}{1em} %0.5\baselineskip
+\setlength{\parindent}{0pt}
+\linespread{1.5}
+%\setlength{\extrarowheight}{5pt}
+
+% Titles
+%\usepackage{tocloft}
+%\usepackage[subfigure]{tocloft}
+%
+%\renewcommand\cftsecaftersnum{.} 
+
+\titleformat*{\section}{\Large\scshape\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+\titleformat*{\paragraph}{\bfseries}
+\titleformat*{\subparagraph}{\bfseries}
+
+\renewcommand{\thesection}{\Roman{section}} % 1.A. as subsections
+\renewcommand{\thesubsection}{\Alph{subsection}} % 1.A. as subsections
+
+\titlespacing{\section}{0pt}{0pt}{-10pt} %
+\titlespacing{\subsection}{0pt}{0pt}{-10pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
+\titlespacing{\paragraph}{0pt}{1pt}{5pt}
+\titlespacing{\subparagraph}{10pt}{1pt}{5pt}
+
+
+%\makeatletter
+%\def\remove@@dot\csname the#1\endcsname{\Roman{#1}}
+%\def\p@section{\remove@@dot}
+%\makeatother
+
+% Link Colors
+\usepackage{hyperref}
+\def\UrlBreaks{\do\/\do-}
+\definecolor{grey}{RGB}{64, 112, 133}
+\hypersetup{
+    colorlinks=true,
+    citecolor = {black},    % turns references blue
+    linkcolor=black, % turn all internal links (refs to other sections/figs/paragraphs)
+    urlcolor={black},  % turn external links (URLs) blue
+}
+
+
+% Captioning
+%\usepackage[font={footnotesize}]{subcaption}
+%\usepackage[font={footnotesize}]{caption}
+\usepackage{caption, setspace}
+\captionsetup{font={stretch=1}}
+\captionsetup[figure]{font={normalsize}, labelfont=normalsize}
+\captionsetup[table]{font={normalsize}, labelfont=normalsize}
+
+% to get figure and tablenotes the way we want them
+\newenvironment{tablenote}[1][Note]{\begin{minipage}[t]{\linewidth}\linespread{0.0}\footnotesize{\itshape#1: }}{\end{minipage}}
+\newenvironment{figurenotes}[1][Note]{\begin{minipage}[t]{\linewidth}\linespread{0.0}\footnotesize{\itshape#1: }}{\end{minipage}}
+
+
+\usepackage[format=hang,labelfont=bf]{caption}
+% Bibliography
+\usepackage{natbib}
+\bibliographystyle{unsrt}
+%\bibliographystyle{ieeetr}
+%\setcitestyle{authoryear, open={(},close={)}}
+
+
+\usepackage{titlesec}
+\usepackage[titletoc,toc,title]{appendix}
+
+
+\usepackage{tabto}
+\def\quoteattr#1#2{\setbox0=\hbox{#2}#1\tabto{\dimexpr\linewidth-\wd0}\box0}
+
+% table & graphics path
+\usepackage{graphicx}
+\makeatletter 
+\def\input@path{{"../../Output/sentiment_analysis/"}} 
+\makeatother
+\definecolor{dgreen}{RGB}{0, 100, 0}
+\definecolor{dred}{RGB}{139, 0, 0}
+
+
+\graphicspath{{"../../Output/sentiment_analysis/"}} 
+\makeatother
+
+
+% homemade commands
+\newcommand{\coded}[1]{\textcolor{black}{#1}}%#salmon
+\newcommand{\tabled}[1]{\textcolor{black}{#1}}%#salmon
+
+\definecolor{forestgreen}{rgb}{0.0, 0.55, 0.0}
+\definecolor{lavenderindigo}{rgb}{0.59, 0.48, 0.71}
+\newcommand{\FixMe}[1]{\textcolor{orange}{ #1}}
+\newcommand{\nedit}[1]{\textcolor{forestgreen}{ #1}}
+\newcommand{\aedit}[1]{\textcolor{lavenderindigo}{ #1}}
+
+
+%\newcommand{\Cut}[1]{\textcolor{red}{ #1}}
+%\newcommand{\Discuss}[1]{\textbf{\textcolor{blue}{ [#1]}}}
+%\newcommand{\Integrate}[1]{\textbf{\textcolor{blue}{ [#1]}}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\makeatother
+
+% tikz
+\usepackage{tikz}
+\tikzset{
+  treenode/.style = {shape=rectangle, 
+  align=center,
+  top color=white},
+  root/.style = {treenode, font=\normalsize},
+  env/.style = {treenode, font=\normalsize},
+  dummy/.style    = {circle,draw}
+}
+
+\usepackage{tabularx}
+\usetikzlibrary{fit}
+
+% header style
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\fancyhf{}
+\rhead{{Sins of Omission}}
+\cfoot{{\small \thepage}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+ \thispagestyle{empty}
+ \begin{center} 
+ \singlespacing	
+\textbf{\scshape \Large Supplemental Material} \\ \vspace{0.75em}
+ {\large Sins of Omission: Model-Based Estimates of the Health Effects of Excluding Pregnant Participants \\ From Randomized Controlled Trials\footnote{Bilinski \& Emanuel contributed equally. 
+ Bilinski: Brown School of Public Health, \url{alyssa\_bilinski@brown.edu}. Emanuel: New York Federal Reserve Bank, \url{natalia@nataliaemanuel.com}.}} 
+ \vspace{0.5em} \\
+ Alyssa Bilinski $\cdot$ Natalia Emanuel $\cdot$ Andrea Ciaranello
+
+ \vspace{1em}
+ 
+  \vspace{0.5em}
+
+\end{center}
+
+\singlespacing
+
+% Add an R chunk
+% Sets options and working directory
+% Note -- R has a limited number of packages
+<<echo = F, warning = F, message = F>>=
+# set options to hide code and only show output
+knitr::opts_chunk$set(eval = TRUE, echo = FALSE, warning = F, message = F)
+
+# add libraries
+# note Overleaf has a limited number of libraries
+knitr::opts_knit$set(root.dir = "/compile")
+library(knitr)
+library(tidyverse)
+library(scales)
+library(readxl)
+library(kableExtra)
+@
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\pagebreak
+
+\section{Methods}
+
+\subsection{\label{app:stat_tests}Statistical tests}
+
+We considered two statistical approaches to detecting effects.  In the main text, we assume null hypothesis of no effect (``standard power'').  The choice of the best method for constructing a confidence interval for a test of proportions has been the subject of considerable debate \citep{agresti_approximate_1998, newcombe_interval_1998, wilson_probable_1927}.  We compared the type I error associated with five methods over our base rates of interest: Wald (simple asymptotic estimate), Wald with a continuity correction, score, score with a continuity correction, and exact (Fisher) \citep{newcombe_interval_1998}.  We drew independent binomial proportions with equal baseline and treated risk over our range of base rates of interest and tested for a statistically significant difference, evaluating type I error over 50,000.  We found that all methods performed well; based on prior work (e.g., \citep{zash_neural-tube_2018}) and to guard against known concerns about Wald intervals \citep{newcombe_interval_1998}, we chose the score interval as our main specification.  
+
+Second, we note that non-inferiority approach may be used to estimate power required to rule out AEs of a given magnitude (``non-inferiority power'').  While, in practice, many studies use the first approach to identify and report AEs, non-inferiority tests have the advantage of directly addressing evidence against AEs (in contrast to a lack of evidence of AEs, which may also be a result of low power).  A non-inferiority test sets a null hypothesis that $p_1 - p_0 > \delta$, that an AE exceeds some margin $\delta$, and evaluates the strength of the evidence that $p_1 - p_0 < \delta$ at a chosen level of statistical significance. However, due to common practice in the literature, we leave further discussion of this approach to future work.
+
+\begin{figure}[H]
+    \centering
+    \caption{Type I error by inference method}
+    \label{fig:t1e}
+    \includegraphics[width = 6.5in]{2_Output/t1_error.png}
+    \begin{figurenotes}
+    The x-axis varies baseline risk and the y-axis varies sample size.  We ran 50,000 simulations, drawing independent binomial proportions with the corresponding per-arm sample size and equal baseline and treated risk over our range of base rates of interest, testing for a statistically significant difference with different methods \citep{newcombe_interval_1998}, and summarizing results as type I error rates.
+    \end{figurenotes}
+\end{figure}
+
+<<>>=
+# read in data
+df = read_excel("./0_Data/1_Parameter_Estimates/table_s1_r1.xlsx") %>%
+  mutate(Value = ifelse(nchar(Value)>10, as.character(as.numeric(Value)), Value))
+@
+
+<<>>=
+df = df[!is.na(df$Code),]
+@
+
+\subsection{RCT costs}
+
+\label{app:trial_costs}
+
+There is considerable variation in the cost of RCTs for drug approval, and there are limited data on the cost of trials specifically including pregnant participants (e.g., \citep{sertkaya2016key, martin2017much, moore_estimated_2018}).  We use \$100m as a conservative estimate of trial costs, assuming increased costs associated with pregnancy-related monitoring and liability \citep{nas_2024}.  In published studies, upper ranges of combined Phase I-III trial costs were approximately \$79m \citep{sertkaya2016key} in one study and \$110m in another \citep{martin2017much}. Another found that 75\% of pivotal trials cost less than \$33m, with a long upper tail \citep{moore_estimated_2018} including approximately 5-6\% exceeding \$100m.
+%For Sertkaya, sum abstract figures: 6.6 + 52.9+19.6
+%For Martin, sum approximate 75th percentiles in Figure 2 (eyeballed)
+%For Moore, eyeballed "Figure": assume 7 or 8/138
+
+\section{\textit{Ex post} value of information}
+\subsection{COVID-19 Vaccines}
+\label{app:methods_covid}
+
+\paragraph{Vaccine uptake counterfactuals.} 
+We obtained data on COVID-19 vaccine uptake in the general population by state, sex, and age group as well as among pregnant people from a subset of states in the Vaccine Safety Datalink from the Centers for Disease Control and Prevention \citep{noauthor_covid-19_nodate, noauthor_weekly_nodate}.  We constructed two potential counterfactuals for COVID-19 vaccine: paralleling either: 1) women from the same age and state (``age- and state-matched'') or 2) women aged 40-49 the same state (``state-matched COVID-19 booster reference''). Figure \ref{app:fig_comp_cf} highlights that even the latter counterfactual is conservative relative to uptake of the 2019 flu vaccine and COVID-19 booster uptake in VSD states, which was strongly recommended during pregnancy.
+
+\begin{figure}[h]
+    \centering
+    \caption{\label{app:fig_comp_cf} Uptake of pregnant vs. counterfactual uptake of other vaccines}
+    Panel A: 2019 influenza vaccine \citep{noauthor_flu_2023, razzaghi_influenza_2020}\\
+    \includegraphics[width = 4.5in]{2_Output/flu_uptake.png} \\
+    Panel B: COVID-19 booster \citep{noauthor_covid-19_nodate, noauthor_weekly_nodate} \\
+    \includegraphics[width = 4.5in]{2_Output/covid_fig_booster.png}\\
+    \label{fig:samp_size_sens}
+   \end{figure}
+
+We first estimated the relative rates of vaccination between pregnant women and the counterfactual group in VSD states (Table \ref{tbl:VSD}). For each month ($m$), we estimated population vaccine series completion in the counterfactual group:
+
+\begin{align*}
+r_m^{CF} = \sum_s \sum_{a} w_{as} r_{asm},
+\end{align*}
+
+where $s$ indicates state, $a$ indicates age groups in a chosen counterfactual, $w_{as}$ indicates the weight given to a particular age group $a$ in state $s$ and $r_{asm}$ is the proportion of individuals in age group $a$ and state $s$ that had completed primary COVID-19 vaccination series by month $m$.
+
+We considered 3 values for $w_{as}$. For primary analysis, we obtained data on fertility rate by maternal age from National Vital Statistics \citep{vital_stats_2023} and combined this with female age-specific population estimates \citep{bureau_state_nodate} to construct weights to represent proportion of births in state $s$ and age group $a$. As sensitivity analyses, we considered weights representing the proportion of births in age group $a$ and location $s$, setting state population to enrollment population in VSD per Table \ref{tbl:VSD}, the proportion of the population, rather than births, in age group $a$ and state $s$, and for the 40-49 counterfactual, total births and total population in state $s$.
+
+We then estimated the relative vaccination rate as:
+\begin{align*}
+RR^{CF}_m = \frac{r_m^{CF}}{r_m^{preg, VSD}},
+\end{align*}
+
+where $r_m^{preg, VSD}$ represents the proportion of the pregnant VSD sample vaccinated at month $m$. 
+
+\paragraph{Extrapolation.} 
+We used these relative rates to estimate pregnant vaccination in states outside of the VSD. 
+
+<<>>=
+# read in data
+df = read.csv("./0_Data/1_Parameter_Estimates/table_s2.csv") 
+kable(df[,1:3] %>% arrange(-Enrollment), format = "latex", booktabs = T,
+  caption = "\\label{tbl:VSD}VSD Enrollment by Site. Sites were extracted from \\citep{lipkind_receipt_2022}. Enrollment figure sources are included in replication data (Table\\_S2\\_Sources).",
+  format.args = list(big.mark = ",")) %>%
+  kable_styling(font_size = 12, latex_options = "HOLD_position") %>%
+  row_spec(0,bold=TRUE)
+@
+
+To assess robustness of the assumption underlying extrapolation of the relative risk of vaccination from the VSD population to non-VSD states, we compared the relative uptake of vaccination among pregnant versus non-pregnant individuals in and outside of VSD states with data the COVID-19 Trends and Impact Survey (CTIS).  CTIS was a cross-sectional internet survey that operated daily throughout the pandemic with over 20 million responses \citep{salomon_us_2021}. It included questions about both vaccine and pregnancy status; we calculated relative risks by month and these in VSD and non-VSD states. Although survey respondents are not fully representative of the US, even with weighting \citep{bradley_unrepresentative_2021}, the result suggested that our assumption was reasonable, and potentially conservative in terms of reduced relative uptake in non-VSD states. (Data analysis was deemed exempt human subjects research by the Brown University IRB, STUDY00000186.)
+
+\begin{figure}[H]
+    \centering
+    \caption{\label{app:fig_uptake} Relative vaccine uptake of pregnant vs non-pregnant individuals in CTIS}
+    \includegraphics[width = 4.5in]{2_Output/CTIS.png}
+   \end{figure}
+
+\paragraph{Health outcomes and valuation.} 
+
+Because vaccination took approximately 1-2 weeks to take full effect \citep{mahase_covid-19_2020, sadoff_safety_2021, baden_efficacy_2021} and the time from infection to death was 2-3 weeks during the study period \citep{illoh_utilization_2018, kasehagen_covid-19associated_2021, shim_clinical_2022}, we aligned vaccination rates at the midpoint of one month with health outcomes for the following month (i.e., 4 weeks before the midpoint of the month corresponding to health outcomes). In sensitivity analyses, we varied this by 2 weeks in either direction.
+
+\begin{enumerate}
+    \item \textit{Maternal mortality from COVID-19 during pregnancy:} We obtained data on COVID-19 deaths during pregnancy from the CDC \citep{noauthor_data_2022}; we denoted deaths in month $m$ as $d_m$.
+    \item \textit{Stillbirth:} Stillbirth is defined as death after 20 weeks of gestation but before or during birth \citep{noauthor_stillbirth_nodate}.  
+    Prior to the delta variant, we assumed an incremental absolute increase in stillbirth risk of 2.7 per 1000 among pregnant individuals; with the delta variant, this increased to 17 per 1000 \citep{desisto_risk_2021, stock_sars_cov_2_2022}.  We multiplied this by the number of diagnosed COVID-19 cases in pregnant people ($c_m$ in month $m$) to estimate monthly stillbirths due to COVID-19 ($s_m$) \citep{noauthor_data_2022}.
+\end{enumerate}
+
+\paragraph{Estimation.} 
+
+We calculated the observed value of information, assuming that given trial data, pregnant individuals would have had the uptake trajectory of the counterfactual group.  We omitted transmission effects because pregnant individuals are a sufficiently small and diffuse group that we expect these to be minimal; resulting bias would be conservatively. (See also replication code.)
+
+We estimated health effects and morbidity and mortality costs avertable with RCT data under that counterfactual as:
+\begin{align*}
+d^{CF} &= \sum_m RR_m^{CF}*d_m \\
+s^{CF} &= \sum_m RR_m^{CF}*s_m \\
+h^{CF} &= \sum_m RR_m^{CF}*VSL(d_m + s_m)
+\end{align*}
+
+\paragraph{Sensitivity analyses.} 
+
+\label{app:sens}
+\begin{center}
+\begin{figure}[H]
+\caption{\label{app:fig_sens_covid} Sensitivity analysis}  
+\includegraphics[width = 6in]{2_Output/sens_analysis.png} 
+\begin{figurenotes}
+    We present results by weight type and vaccination rate timing. Results were not sensitive to these assumptions.
+\end{figurenotes}
+\end{figure}
+\end{center}
+
+
+\subsection{Dolutegravir}
+
+\label{app:methods_dtg}
+We estimated expected mortality reduction from dolutegravir over alternative regimens based on Table 2 (row 3) of previous work \citep{dugdale_risks_2019}:
+
+\begin{align*}
+&\frac{276,500\text{ deaths from EFV }- 262,800\text{ deaths from DTG}}{3.1\text{ million women }\times 5\text{ years}} \\ &= 0.00088\text{ decrease in maternal deaths/year},
+\end{align*}
+
+where EFV refers to efavirenz (the alternative studied in comparison to dolutegravir) and DTG refers to dolutegravir.  These estimates used a 5-year time horizon \citep{dugdale_risks_2019}. Our calculation assumed mortality risk was constant over that horizon, an approximation selected based on the short time horizon and generally low risk profile of the target population.  Main results were not sensitive to small deviations of this parameter.
+
+Another estimate, which used a 20-year time horizon, projected a greater difference in mortality \citep{phillips_risks_2019} (Table 3, ``AIDS death rate in people on ART (per 100 person-years)").  While the base case death rate for non-dolutegravir regimens was similar at 1.7 deaths per 100 person-years (equivalent to 264,000 deaths for a cohort of 3.1 million over 5 years), they projected a decrease in mortality to 0.72 deaths per 100 person-years from dolutegravir-based regimens, which would correspond to 111,600 deaths per 100 person-years for a cohort of 3.1 million over 5 years.  We attributed this difference to non-linear effects on mortality over a longer time horizon, and used the lower estimate to be conservative, with the assumption that individuals on non-dolutegravir based regimens may switch to higher efficacy regimens over a longer time horizon. 
+
+Last, we compared our risk difference estimate to the corresponding risk ratio from \citep{dugdale_risks_2019} at \Sexpr{round(262800/276500, 2)}. This study assumed a base mortality rate of \Sexpr{round(276500/3100000*100,1)}\% over 5 years among a cohort of HIV positive individuals on or initiating treatment, approximately \Sexpr{round(276500/3100000/5*100,1)}\% per year. This mortality rate was similar to one estimate of overall HIV mortality among women 15-49 of childbearing age 
+%\Sexpr{round(as.numeric(gsub(",", "", df$Value[df$Code=="DTG.deaths.HIV"]))/(as.numeric(df$Value[df$Code=="DTG.n.tot.ART"])*1000000/as.numeric(df$Value[df$Code=="DTG.perc.preg.ART"])))}\% 
+\citep{unaids_aids_2019, noauthor_aidsinfo_nodate, who_hiv_2022}, which would make risk ratio and risk difference estimates similar, but did not account for deaths among individuals unexposed to ART. A lower base mortality rate among HIV positive individuals who have started ART may reduce the corresponding risk difference, but given limited data and the conservative estimate in \citep{dugdale_risks_2019} compared to \citep{phillips_risks_2019}, we deferred to the risk difference estimate.
+
+\section{\textit{A Priori} Value of Information}
+\label{app:apriori_voi}
+
+\subsection{Thalidomide}
+\label{app:apriori_voi_thal}
+
+We obtained NNT to obtain \$100m health value:
+\begin{align*}
+\frac{\$100m}{0.114 \text{ DALYs}*45\text{ days}/365 \text{ days/year}*\$100,000 \text{ WTP per QALY}} = 71,150
+\end{align*}
+
+Our AE multiplier was generated:
+\begin{align*}
+\frac{\text{8000 affected individuals with ILDs}}{200 \text{ treated individuals in RCT} \times 1/6 \text{ affected by ILDs}}*0.8\text{ for optimism down-weighting}=192  
+\end{align*}
+
+All parameters are sourced in Table 2 (main text).
+
+\subsection{COVID-19}
+
+At the start the pandemic, it was unknown how the pandemic would progress. Researchers in the spring and summer of 2020 when COVID-19 trials began would not have known, for example, about the larger impacts that the delta variant had relative to wildtype and alpha variants \citep{desisto_risk_2021, stock_sars_cov_2_2022}. 
+
+Because there were substantial uncertainties, we explored the range of beliefs about vaccine risks and benefits to pregnant people and their offspring that could have substantially reduced the \textit{a priori} value of a vaccine trial. 
+\begin{enumerate}
+    \item \textit{Risks to pregnant people from COVID-19:} Pregnant people are typically at a higher risk of severe complications from viral infections like influenza \citep{malhame_moral_2020}.  Early in the pandemic, although maternal deaths were observed, most commonly during the second or third trimester, complications were less extreme than those observed in other novel coronaviruses, SARS-CoV-1 and MERS \citep{knight_characteristics_2020, hantoushzadeh_maternal_2020, schwartz_analysis_2020}.  Over the course of 2020 and early 2021, a substantial body of literature came to support the finding of increased adverse outcomes in pregnant people due to COVID-19 \citep[e.g.,][]{villar_maternal_2021, jering_clinical_2021}.  Based on these, we varied prior belief about COVID-19 mortality during pregnancy from 0.05\% to 1\%.
+    
+    \item \textit{Expected pandemic intensity post-vaccine availability:} With a high rate of circulating SARS-CoV-2, all people are at a higher risk of catching the virus; if vaccines had driven down COVID-19 to minimal levels in the population, achieving herd immunity, this risk would have been lower.  At the time of vaccine roll-out, the alpha variant had arisen, demonstrating evolutionary potential of the virus, but it was not yet known whether the virus would evolve to evade transmission benefits of the vaccine (even as protection against severe disease and death remained high). To address the possibility of low incidence diminishing the value of a vaccine or a new variant, we varied the expected probability of contracting COVID-19 during pregnancy from 0.5\%-10\%.
+
+    \item \textit{Risks to fetuses from COVID-19:} Perhaps the largest source of uncertainty was the risk of negative outcomes on fetuses. This uncertainty is significant both because there was weaker evidence about vaccines' fetal impacts and because the main conclusions above depend considerably on the fetal impacts of the vaccine. Early, small studies did not find significant effects on fetal outcomes, though these estimates often lacked power to detect rare events \citep[e.g.,][]{dube_covid-19_2020}. Findings of an increased risk of pre-term labor from COVID-19 exposure, as well as documented poor outcomes in pregnant people, were consistent with increased risks to the fetus \citep{villar_maternal_2021, jering_clinical_2021}. We varied the risk difference in stillbirths with and without COVID-19 vaccines from 0 to 2\%. 
+
+\end{enumerate}
+
+We begin with a simple calculation, assuming an infection fatality similar to influenza and more conservative than \citep{villar_maternal_2021, jering_clinical_2021}. 
+\begin{align*}
+\frac{\$100m}{0.001 \text{ IFR} \times 0.05\text{ probability of contracting COVID-19} *\$8m \text{ VSL}} = 250,000
+\end{align*}
+
+For AE multiplier, we multiplied 2019 live births (3.7 million) by 1-5\% \citep{martin_births_nodate} and divided by 1000 assumed in a large RCT.
+
+For a more complex analysis, we compared the costs of an RCT to the total health benefits varying the 3 types of uncertainty (above) and calculating NNT.
+
+\label{app:fig}
+\begin{center}
+\begin{figure}[H]
+\caption{\label{app:fig_voi_covid} NNT across assumptions}  
+\includegraphics[width = 6in]{2_Output/nnt.png} 
+\end{figure}
+\end{center}
+
+\subsection{Dolutegravir}
+\label{app:apriori_voi_dtg}
+
+We obtained NNT to obtain \$100m health value:
+\begin{align*}
+\frac{\$100m}{1.773\% \text{ mortality rate} \times 0.03 \text{ risk reduction} \times \$8m \text{ VSL}} \approx 23,501
+\end{align*}
+
+For our second AE multiplier benchmark, we multiplied the proportion of women exposed to dolutegravir prior to the erroneous Botswana safety signal (1.9\%) by annual pregnancies among women on ART (1.2 million) to obtain 22,800.
+
+All parameters are sourced in Table 2 (main text).
+
+\section{Other Statistics}
+
+\subsection{Population That Has Given Birth}
+For the statistic that 71\% of women aged 18-50 have given birth at least once, we estimated the total population in the US that has given birth using the 2014, 2016, 2018, and 2020 waves of the Current Population Survey (CPS) June Fertility Supplement \citep{cps}. The CPS asks all women aged 15-50 surveyed in each fertility supplement how many live births they have ever had. For those over age 50, for whom this question is not asked, we used the age 50 ever-given-birth rate. We pooled the four survey years and estimate for each single year of age 18 through 50 a weighted, all-waves female birthing rate and an average-across-waves adult female population size, using the person-level weights given by CPS. We multiplied birth rates and population sizes for each year of age, summed these ever-given-birth populations, and divided by the total adult female population.
+
+\newpage
+\singlespacing
+\bibliography{pregnancy_trials}
+\end{document}

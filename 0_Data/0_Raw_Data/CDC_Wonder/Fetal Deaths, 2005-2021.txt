@@ -1,0 +1,39 @@
+"Notes"	"Year"	"Year Code"	"Month"	"Month Code"	Fetal Deaths
+	"2021"	"2021"	"January"	"1"	1746
+	"2021"	"2021"	"February"	"2"	1555
+	"2021"	"2021"	"March"	"3"	1675
+	"2021"	"2021"	"April"	"4"	1757
+	"2021"	"2021"	"May"	"5"	1726
+	"2021"	"2021"	"June"	"6"	1790
+	"2021"	"2021"	"July"	"7"	1747
+	"2021"	"2021"	"August"	"8"	1925
+	"2021"	"2021"	"September"	"9"	2005
+	"2021"	"2021"	"October"	"10"	1735
+	"2021"	"2021"	"November"	"11"	1674
+	"2021"	"2021"	"December"	"12"	1770
+"Total"	"2021"	"2021"			21105
+"Total"					21105
+"---"
+"Dataset: Fetal Deaths, 2005-2021"
+"Query Parameters:"
+"Year: 2021"
+"Group By: Year; Month"
+"Show Totals: True"
+"Show Zero Values: False"
+"Show Suppressed: False"
+"---"
+"Help: See http://wonder.cdc.gov/wonder/help/fetal-deaths.html for more information."
+"---"
+"Query Date: Mar 26, 2024 5:05:29 PM"
+"---"
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+"System, Fetal Deaths on CDC WONDER Online Database. Data are from the Fetal Death Records 2005-2021, as compiled from data"
+"provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed at"
+"http://wonder.cdc.gov/fetal-deaths-current.html on Mar 26, 2024 5:05:29 PM"
+"---"
+Caveats:
+"1. Beginning in 2014, NCHS changed the standard for gestational period from the Last Menstrual Period (LMP) based gestational"
+"age to the Obstetric/clinical Estimate (OE) based gestational age. This change has resulted in a discontinuity in identifying"
+"fetal deaths at 20 weeks or greater for inclusion in this dataset. Refer to the User Guide to the Fetal Death Public Use File:"
+"https://www.cdc.gov/nchs/data_access/vitalstatsonline.htm. and the Measuring Gestational Age in Vital Statistics Data:"
+"Transitioning to the Obstetric Estimate: https://www.cdc.gov/nchs/data/nvsr/nvsr64/nvsr64_05.pdf. report for more information."
